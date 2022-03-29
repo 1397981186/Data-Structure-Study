@@ -1454,7 +1454,71 @@ public class Graph {
 
 ```
 
+### 图的遍历
 
+从图的某一顶点出发访遍图中其余顶点，且使每个顶点仅被访问一次，这一过程就叫做图的遍历。
+
+一般有两种访问策略: (1)深度优先遍历 (2)广度优先遍历  
+
+#### 深度优先遍历（DFS）
+
+**基本思想**：从初始访问结点出发， 初始访问结点可能有多个邻接结点， 深度优先遍历的策略就是首先访问第一个邻接结点， 然后再以这个被访问的邻接结点作为初始结点， 访问它的第一个邻接结点， 可以这样理解：每次都在访问完当前结点后首先访问当前结点的第一个邻接结点。  
+
+**算法步骤**：
+
+1. 访问初始结点 v， 并标记结点 v 为已访问。  
+2. 查找结点 v 的第一个邻接结点 w。  
+3. 若 w存在，则继续执行4，如果w不存在，则回到第 1 步，从 v 的下一个结点继续。  
+4. 若 w未被访问，对 w 进行深度优先遍历递归（即把 w 当做另一个 v， 然后进行步骤 123） 。  
+5. 查找结点 v 的 w 邻接结点的下一个邻接结点，转到步骤 3。  
+
+**代码实现**
+
+```java
+    //得到第一个邻接结点的下标w(由A得到B)
+    //每次都是ABCDE这样一个顺序找
+    public int getFirstNeighbor(int index){
+        for (int j = 0; j < vertexList.size(); j++) {
+            if (edges[index][j]>0){
+                return j;
+            }
+        }
+        return -1;
+    }
+    
+    //根据前一个邻接结点的下标来获取下一个邻接结点（由A得到B后，发现B访问过了，再得到C）
+    //每次都是ABCDE这样一个顺序找
+    public int getNextNeighbor(int v1,int v2){
+        for (int j = v2+1; j < vertexList.size(); j++) {
+            if (edges[v1][j]>0){
+                return j;
+            }
+        }
+        return -1;
+    }
+    
+    //深度优先遍历算法
+    public void dfs(boolean[] isVisited,int i){
+        System.out.print(getValueByIndex(i)+"->");
+        isVisited[i]=true;
+        int w=getFirstNeighbor(i);
+        while (w!=-1){//当前结点往下探
+            if (!isVisited[w]){
+                dfs(isVisited,w);
+            }
+            w=getNextNeighbor(i,w);
+        }
+    }
+    
+    //考虑非连通图，如果第一个结点是孤立结点
+    public void dfs(){
+        for (int i = 0; i < getNumOfVertex(); i++) {
+            if (!isVisited[i]){
+                dfs(isVisited,i);
+            }
+        }
+    }
+```
 
 
 
