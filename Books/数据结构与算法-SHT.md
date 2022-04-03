@@ -6,8 +6,6 @@
 
 程序=数据结构+算法
 
-​		先看看leetcode上面什么样的，可以考虑前期做课后习题，后期刷leetcode
-
 ### 数据结构包括： 线性结构和非线性结构
 
 **线性结构**
@@ -2279,6 +2277,14 @@ public class DacHannuoTower {
 
 动态规划可以通过填表的方式来逐步推进， 得到最优解  
 
+以下内容来自知乎：
+
+按照定义，动态规划是把一个大问题拆解成一堆小问题，这个本身没啥问题，但是我觉得的这个不是动态规划的核心思想，或者说，一个”大问题"之所以能用”动态规划“解决，并不是因为它能拆解成一堆小问题，事实上啥大问题都能拆解成小问题...
+
+**取决于该问题是否能用动态规划解决的是这些”小问题"会不会被被重复调用。**
+
+![image-20220403211405362](数据结构与算法-SHT.assets/image-20220403211405362.png)
+
 #### 应用场景-背包问题  
 
 ![image-20220402213352324](数据结构与算法-SHT.assets/image-20220402213352324.png)
@@ -2287,4 +2293,87 @@ public class DacHannuoTower {
 - 要求装入的物品不能重复  
 
 分 01 背包和完全背包(完全背包指的是： 每种物品都有无限件可用) 。这里的问题属于 01 背包， 即每个物品最多放一个。 而无限背包可以转化为 01 背包。   
+
+![image-20220403203734865](数据结构与算法-SHT.assets/image-20220403203734865.png)
+
+右边的表：
+
+- 第一行代表只有吉他，第二行代表有吉他和音响，第三行以此类推。
+- 第一列代表背包最大重量为0磅，第二列代表背包最大重量为1磅，后面的以此类推。
+- 第m行第n列代表：背包重量为n-1，共考虑m个物品的最大值。
+
+![image-20220403212134163](数据结构与算法-SHT.assets/image-20220403212134163.png)
+
+https://www.bilibili.com/video/BV1E4411H73v?p=158&spm_id_from=pageDriver
+
+代码实现：
+
+```java
+public class DynamicProgramming {
+    //以背包问题为例
+    public static void main(String[] args) {
+        int[] w={1,4,3,10};
+        int[] val={1500,3000,2000,20};
+        int m=5;//背包的容量
+        int n=val.length;
+        int[][] v=new int[n+1][m+1];//有一行0和有一列0
+        //v[i][j]表示前i个物品中能够装入容量weij的背包中的最大价值
+        int[][] path=new int[n+1][m+1];
+        //记录存储情况
+        
+        for (int i = 0; i < v.length; i++) {
+            v[i][0]=0;
+        }
+        for (int i = 0; i < v[0].length; i++) {
+            v[0][i]=0;
+        }
+        //注意，没有用到递归
+        for (int i = 1; i < v.length; i++) {
+            for (int j = 1; j < v[0].length; j++) {
+                if (w[i-1]>j){//注意此处下标减一是因为w的第i个物品下标为i-1，v同理
+                    v[i][j]=v[i-1][j];
+                }else {
+//                    v[i][j]=Math.max(v[i-1][j],val[i-1]+v[i-1][j-w[i-1]]);
+                    //为了记录存放情况，不能直接使用上面的公式。需要使用if-else体现公式
+                    if (v[i-1][j]<val[i-1]+v[i-1][j-w[i-1]]){
+                        v[i][j]=val[i-1]+v[i-1][j-w[i-1]];
+                        path[i][j]=1;
+                    }else {
+                        v[i][j]=v[i-1][j];
+                    }
+                }
+            }
+        }
+    
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < v[i].length; j++) {
+                System.out.print(v[i][j]+" ");
+            }
+            System.out.println();
+        }
+    
+        for (int i = 0; i < path.length; i++) {
+            for (int j = 0; j < path[i].length; j++) {
+                System.out.print(path[i][j]+" ");
+            }
+            System.out.println();
+        }
+        //输出最后放入了哪些商品
+        int i=path.length-1;
+        int j=path[0].length-1;
+        while (i>0&&j>0){
+            if (path[i][j]==1){
+                System.out.println("第"+i+"个商品放入背包");
+                j-=w[i-1];//去掉重量，再找放的
+                //一次找到肯定是最后一行的，因为重量是背包重量
+            }
+            i--;
+        }
+    }
+}
+```
+
+
+
+
 
