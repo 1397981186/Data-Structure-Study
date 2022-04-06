@@ -2366,6 +2366,7 @@ public class DynamicProgramming {
                 System.out.println("第"+i+"个商品放入背包");
                 j-=w[i-1];//去掉重量，再找放的
                 //一次找到肯定是最后一行的，因为重量是背包重量
+                //PS：放的时候是先行后列找的
             }
             i--;
         }
