@@ -2423,3 +2423,62 @@ KMP 方法算法就利用之前判断过信息， 通过一个 next 数组， �
 
 https://blog.csdn.net/qq_45631689/article/details/109604832
 
+```java
+public class KMPAlgorithm {
+    public static void main(String[] args) {
+        String str1= "BBC ABCDAB ABCDABCDABDE";
+        String str2 = "ABCDABD";
+        int[] next=kmpNext("ABCDABD");
+//        int[] next=kmpNext("ABABCABABA");
+        System.out.println(Arrays.toString(next));
+        int index=kmpSearch(str1,str2,next);
+        System.out.println(index);
+    
+    }
+    
+    public static int kmpSearch(String str1,String str2,int[] next){
+        for (int i = 0,j=0; i < str1.length(); i++) {
+            //遍历一遍
+            //j为累计匹配到的长度
+            while (j>0&&str1.charAt(i)!=str2.charAt(j)){
+                j=next[j-1];
+            }
+            if (str1.charAt(i)==str2.charAt(j)){
+                j++;
+            }
+            
+            if (j==str2.length()){
+                //此时j比i小一，j++了i还没加
+                return i-j+1;
+            }
+        }
+        return -1;
+    }
+    
+    //获取部分匹配值
+    public static int[] kmpNext(String dest){
+        //创建数组保存部分匹配值
+        int[] next=new int[dest.length()];
+        next[0]=0;//如果字符串长度为1，部分匹配值就是0
+        //例：0000120，“ABCDABD”到最后一个D时，不相等，移动6-2=4个
+        // 需注意每一个next[i]都是i长度时的部分匹配值,j是部分匹配值
+        //https://blog.csdn.net/qq_45631689/article/details/109604832
+        //上面链接中自己的思考：next[j-1]代表j向前移一位的部分匹配值（以最后一个为例，四个字符aaab和aaaa不对了，那我回退一下看看两个串的前三个字符aaa和aaa能不能匹配上）
+        for (int j=0,i=1; i <dest.length() ; i++) {//i指向正在匹配字符，j表示最大公共前后缀
+            while (j>0&&dest.charAt(i)!=dest.charAt(j)){
+                j=next[j-1];
+                //填D（第六个）时，是D已经匹配上了，假如第七个没有匹配上，少移动几位
+                //while会一直取，直到取到一样的或者j=0
+            }
+            if (dest.charAt(i)==dest.charAt(j)){//相等时，部分匹配值加一（动态规划）
+                j++;
+            }
+            next[i]=j;
+        }
+        return next;
+        
+    }
+}
+
+```
+
