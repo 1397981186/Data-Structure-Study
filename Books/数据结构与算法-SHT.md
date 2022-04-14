@@ -1,3 +1,5 @@
+
+
 # 数据结构
 
 学习方法：笔记为主，视频为辅，后期加以leetcode刷题。
@@ -2421,7 +2423,7 @@ KMP 方法算法就利用之前判断过信息， 通过一个 next 数组， �
 
 #### 代码实现
 
-https://blog.csdn.net/qq_45631689/article/details/109604832
+代码理解（韩老师：同学们，背会就行了。。。）https://blog.csdn.net/qq_45631689/article/details/109604832
 
 ```java
 public class KMPAlgorithm {
@@ -2479,6 +2481,220 @@ public class KMPAlgorithm {
         
     }
 }
+```
+
+### 贪心算法
+
+贪婪算法(贪心算法)是指在对问题进行求解时， 在每一步选择中都采取**最好**或者**最优**(即最有利)的选择， 从而希望能够导致结果是最好或者最优的算法  
+
+#### 应用场景-集合覆盖问题
+
+假设存在下面需要付费的广播台， 以及广播台信号可以覆盖的地区。 如何选择最少的广播台， 让所有的地区都可以接收到信号  
+
+![image-20220413212851670](数据结构与算法-SHT.assets/image-20220413212851670.png)
+
+如何找出覆盖所有地区的广播台的集合呢
+
+- 使用穷举法实现,列出每个可能的广播台的集合， 这被称为幂集。 假设总的有 n 个广播台， 则广播台的组合总共有2ⁿ -1 个,假设每秒可以计算 10 个子集
+
+  ![image-20220413213018176](数据结构与算法-SHT.assets/image-20220413213018176.png)
+
+- 使用贪婪算法  
+
+  遍历所有的广播电台, 找到一个覆盖了最多未覆盖的地区的电台，将这个电台加入到一个集合中(比如 ArrayList), 想办法把该电台覆盖的地区在下次比较时去掉。重复直到覆盖了全部的地区  
+
+  ![image-20220414195327658](数据结构与算法-SHT.assets/image-20220414195327658.png)
+
+  代码略，需要注意此处HashMap，HashSet，ArrayList的使用
+
+  ```java
+  public class GreedyAlgorithm {
+      public static <newArrayList> void main(String[] args) {
+          //创建广播电台，放入到Map
+          HashMap<String, HashSet<String>> broadcasts = new HashMap<>();
+          
+          HashSet<String> hashset1 = new HashSet<>();
+          hashset1.add("北京");
+          hashset1.add("上海");
+          hashset1.add("天津");
+          HashSet<String> hashset2 = new HashSet<>();
+          hashset2.add("广州");
+          hashset2.add("北京");
+          hashset2.add("深圳");
+          HashSet<String> hashset3 = new HashSet<>();
+          hashset3.add("成都");
+          hashset3.add("上海");
+          hashset3.add("杭州");
+          HashSet<String> hashset4 = new HashSet<>();
+          hashset4.add("上海");
+          hashset4.add("天津");
+          HashSet<String> hashset5 = new HashSet<>();
+          hashset5.add("杭州");
+          hashset5.add("大连");
+          
+          broadcasts.put("K1",hashset1);
+          broadcasts.put("K2",hashset2);
+          broadcasts.put("K3",hashset3);
+          broadcasts.put("K4",hashset4);
+          broadcasts.put("K5",hashset5);
+      
+          HashSet<String> allAreas = new HashSet<>();
+          allAreas.add("北京");
+          allAreas.add("上海");
+          allAreas.add("天津");
+          allAreas.add("广州");
+          allAreas.add("深圳");
+          allAreas.add("成都");
+          allAreas.add("杭州");
+          allAreas.add("大连");
+      
+          //存放选的电台，此处用list不用数组是因为不能确定大小
+          ArrayList<String> selects = new ArrayList<>();
+      
+          HashSet<String> temp = new HashSet<>();
+  
+      }
+  }
+  
+  ```
+
+
+
+
+### 普里姆算法  
+
+#### 基本介绍
+
+普利姆(Prim)算法求最小生成树， 也就是在包含 n 个顶点的连通图中， 找出只有(n-1)条边包含所有 n 个顶点的连通子图， 也就是所谓的极小连通子图  
+
+**最小生成树** ：简称 MST。给定一个带权的无向连通图,如何选取一棵生成树,使树上所有边上权的总和为最小,这叫最小生成树   
+
+1. N 个顶点， 一定有 N-1 条边  
+2. 包含全部顶点，N-1 条边都在图中   
+
+求最小生成树的算法主要是**普里姆算法**和**克鲁斯卡尔算法**  
+
+
+
+**普利姆(Prim)算法**
+
+设 G=(V,E)是连通网， T=(U,D)是最小生成树， V,U 是顶点集合， E,D 是边的集合  
+
+1. 若从顶点 u 开始构造最小生成树， 则从集合 V 中取出顶点 u 放入集合 U 中， 标记顶点 v 的 visited[u]=1  
+2. 若集合 U 中顶点 ui 与集合 V-U 中的顶点 vj 之间存在边， 则寻找这些边中权值最小的边， 但**不能构成回路**， 将顶点 vj 加入集合 U 中， 将边（ui,vj） 加入集合 D 中， 标记 visited[vj]=1
+3.   重复步骤1， 直到 U 与 V 相等， 即所有顶点都被标记为访问过， 此时 D 中有 n-1 条边  
+
+图解普里姆算法  
+
+![image-20220414211047128](数据结构与算法-SHT.assets/image-20220414211047128.png)
+
+
+
+#### 普里姆算法最佳实践(修路问题)  
+
+代码实现
+
+注意学习：图的创建与遍历，生成最小生成树的过程中，每个子图如何遍历
+
+```java
+public class PrimAlgorithm {
+    public static void main(String[] args) {
+        char[] data=new char[]{'A','B','C','D','E','F','G'};
+        int verxs=data.length;
+        int[][] weight=new int[][]{
+                {10000,5,7,10000,10000,10000,2},
+                {5,10000,10000,9,10000,10000,3},
+                {7,10000,10000,10000,8,10000,10000},
+                {10000,9,10000,10000,10000,4,10000},
+                {10000,10000,8,10000,10000,5,4},
+                {10000,10000,10000,4,5,10000,6},
+                {2,3,10000,10000,4,6,10000}
+        };
+        MGraph mGraph = new MGraph(verxs);
+        Mintree mintree = new Mintree();
+        mintree.createGraph(mGraph,verxs,data,weight);
+        mintree.prim(mGraph,0);
+    }
+}
+
+
+//创建最小生成树
+class Mintree{
+    public void createGraph(MGraph graph,int verxs,char[] data,int[][] weight){
+        int i,j;
+        for (i = 0; i < verxs; i++) {
+            graph.data[i]=data[i];
+            for (j = 0; j <verxs ; j++) {
+                graph.weight[i][j]=weight[i][j];
+            }
+        }
+    }
+    
+    public void showGraph(MGraph graph){
+        for (int[] link: graph.weight) {
+            System.out.println(Arrays.toString(link));
+        }
+    }
+    
+    public void prim(MGraph graph,int v){
+        int visited[]=new int[graph.verxs];
+        visited[v]=1;
+        //h1,h2记录两个顶点的下标
+        int h1=-1;
+        int h2=-1;
+        int minWeight=10000;
+        for (int k = 1; k < graph.verxs; k++) {//graph.verxs-1条边
+            //确定每一次生成的子图 ， 和哪个结点的距离最近
+            for (int i = 0; i < graph.verxs; i++) {
+                for (int j = 0; j <graph.verxs; j++) {
+                    //寻找已经访问过的结点和未访问过的结点间的权值最小的边
+                    if (visited[i]==1&&visited[j]==0&&graph.weight[i][j]<minWeight){
+                        minWeight=graph.weight[i][j];
+                        h1=i;
+                        h2=j;
+                    }
+                }
+            }
+            System.out.println("边<"+graph.data[h1]+","+graph.data[h2]+">权值"+minWeight);
+            visited[h2]=1;
+            minWeight=10000;
+            
+        }
+    }
+}
+
+//注意学习如何创建一个图
+class MGraph{
+    int verxs;//节点个数
+    char[] data;//存放节点数据
+    int[][] weight;//存放权值（邻接矩阵）
+    
+    public MGraph(int verxs){
+        this.verxs=verxs;
+        data=new char[verxs];
+        weight=new int[verxs][verxs];
+    }
+}
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
