@@ -2715,15 +2715,219 @@ class MGraph{
 
   将所有顶点按照从小到大的顺序排列好之后； 某个顶点的终点就是"与它连通的最大顶点"。
 
-  接下来， 虽然<C,E>是权值最小的边。 但是 C 和 E 的终点都是 F， 即它们的终点相同， 因此， 将<C,E>加入最小生成树的话， 会形成回路。 这就是判断回路的方式。 也就是说， **我们加入的边的两个顶点不能都指向同一个终点， 否则将构成回路。**    
+  接下来， 虽然<C,E>是权值最小的边。 但是 C 和 E 的终点都是 F， 即它们的终点相同， 因此， 将<C,E>加入最小生成树的话， 会形成回路。 这就是判断回路的方式。 也就是说， **我们加入的边的两个顶点不能都指向同一个终点， 否则将构成回路。**(注意理解这里面的终点，指的是都能到达的点，如果A能到F，E能到F则A到E之间必有一条路，此时再连接AE中的任何一部分，都会形成回路。见代码中自己给的测试，debug)    
 
   注意：不能通过判断两个顶点是否访问过来避免回路，这样会导致DE边连接不上。
 
+```java
+public class Kruska {
+    private int edgeNum;//边的个数
+    private char[] vertexs;//顶点数组
+    private int[][] matrix;//邻接数组
+    private EData[] edges;
+    private static final int INF=Integer.MAX_VALUE;
+    
+    public static void main(String[] args) {
+//        char[] vertexs={'A','B','C','D','E','F','G'};
+//
+//        int matrix[][]={
+//                {0,12,INF,INF,INF,16,14},
+//                {12,0,10,INF,INF,7,INF},
+//                {INF,10,0,3,5,6,INF},
+//                {INF,INF,3,0,4,INF,INF},
+//                {INF,INF,5,4,0,2,8},
+//                {16,7,6,INF,2,0,9},
+//                {14,INF,INF,INF,8,9,0}
+//        };
+        char[] vertexs={'A','B','C','D','E','F'};
+        int matrix[][]={
+            {0,1,INF,INF,4,INF},
+            {1,0,2,INF,5,INF},
+            {INF,2,0,3,INF,INF},
+            {INF,INF,3,0,INF,INF},
+            {4,5,INF,INF,0,6},
+            {INF,INF,INF,INF,6,0},
+        };
+        Kruska kruska = new Kruska(vertexs, matrix);
+//        kruska.print();
+//        System.out.println("No sort");
+//        System.out.println(Arrays.toString(kruska.getEdges()));
+//
+//        EData[] EDGES=kruska.getEdges();
+//        kruska.sortEdges(EDGES);
+////        kruska.sortEdges(kruska.getEdges());
+//        System.out.println("sort");
+//        System.out.println(Arrays.toString(EDGES));
+//        System.out.println(Arrays.toString(kruska.getEdges()));
+//
+//        System.out.println(EDGES);
+//        System.out.println(kruska.getEdges());//为什么地址一样，打印出来的不一样？？
+        
+        kruska.kruskalAlgorithm();
+    }
+    
+    public  Kruska(char[] vertexs,int[][] matrix){
+//        this.vertexs=vertexs;
+//        this.matrix=matrix;
+//         不建议直接这样做，为了数据隔离，引用类型传的是地址
+        
+        int vlen=vertexs.length;
+        this.vertexs=new char[vlen];
+        for (int i = 0; i < vertexs.length; i++) {
+            this.vertexs[i]=vertexs[i];
+        }
+        
+        this.matrix=new int[vlen][vlen];
+        for (int i = 0; i < vlen; i++) {
+            for (int j = i+1; j < vlen; j++) {
+                this.matrix[i][j]=matrix[i][j];
+            if (this.matrix[i][j]!=INF){
+                edgeNum++;
+            }
+            }
+        }
+        this.edges= new EData[edgeNum];
+    }
+    
+    //输入'A'返回对应的下标，如果找不到返回负一
+    private int getPosition(char ch){
+        for (int i = 0; i < vertexs.length; i++) {
+            if (vertexs[i]==ch){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //获取图中的边，放入EDate数组中
+    //EDate数组在后面的方法中用来排序
+    private EData[] getEdges(){
+        int index=0;
+        for (int i = 0; i < vertexs.length ; i++) {
+            for (int j = i+1; j < vertexs.length; j++) {
+                if (matrix[i][j]!=INF){
+                    //这样创建j一定大于i，则A一定是start，F一定是end，具有一定顺序
+                    this.edges[index++]=new EData(vertexs[i],vertexs[j],matrix[i][j]);
+                }
+            }
+        }
+        return this.edges;
+    }
+    
+    //获取下标为i顶点的终点，用于判断两个顶点的终点是否相同
+    //ends[]记录了各个顶点对应的终点是哪个
+    private int getEnd(int[]ends,int i){
+        while (ends[i]!=0){//while循环找终点
+            i=ends[i];
+        }
+        return i;//等于0时返回的还是i
+    }
+    
+    //对边进行排序，来获最轻的边。采用冒泡排序
+    private void sortEdges(EData[] edges){
+        for (int i = 0; i < edges.length - 1; i++) {
+            for (int j = 0; j < edges.length-1-i; j++) {
+                if (edges[j].weight>edges[j+1].weight){
+                    EData tmp=edges[j];
+                    edges[j]=edges[j+1];
+                    edges[j+1]=tmp;
+                }
+            }
+        }
+    }
+    
+    public void kruskalAlgorithm(){
+        int index=0;
+        int[] ends=new int[edgeNum];//每个顶点的终点
+        EData[] rets=new EData[edgeNum];//用于保存最后的最小生成树
+        
+        EData[] edges=getEdges();//获取图中所有的边
+    
+        //遍历数组，找最小的且不会生成回路的边
+        sortEdges(edges);
+        for (int i = 0; i < edgeNum; i++) {
+            int p1=getPosition(edges[i].start);
+            int p2=getPosition(edges[i].end);
+            
+            int m=getEnd(ends,p1);//获取p1的终点
+            int n=getEnd(ends,p2);//获取p2的终点
+            
+            if (m!=n){
+                ends[m]=n;
+                rets[index++]=edges[i];
+            }
+        }
+        System.out.println(Arrays.toString(rets));
+        System.out.println(rets.length);
+        
+    }
+    
+    public void print(){
+        System.out.println("邻接矩阵：");
+        for (int i = 0; i < vertexs.length; i++) {
+            for (int j = 0; j < vertexs.length; j++) {
+                //为了输出好看进行占位
+                System.out.printf("%12d",matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
+
+//表示边
+class EData{
+    char start;//边的一端
+    char end;//边的另一端
+    int weight;
+    
+    public EData(char start, char end, int weight) {
+        this.start = start;
+        this.end = end;
+        this.weight = weight;
+    }
+    
+    @Override
+    public String toString() {
+        return "EData{" +
+                "start=" + start +
+                ", end=" + end +
+                ", weight=" + weight +
+                '}';
+    }
+}
+```
+
+![image-20220417213525874](数据结构与算法-SHT.assets/image-20220417213525874.png)
+
+代码中用的是这个图，当判断BE是否加入时，ends数组为：ends :[ 1,2,3,4,0,0],n=4,m=4，（认为B能到E，E能到E）不添加BE
 
 
 
+### 迪杰斯特拉算法  
+
+迪杰斯特拉(Dijkstra)算法是典型最短路径算法， 用于计算一个结点到其他结点的最短路径。 它的主要特点是以起始点为中心向外层层扩展(**广度优先搜索思想**)， 直到扩展到终点为止。  
+
+算法过程图解：https://www.cnblogs.com/littlewrong/p/9196060.html
+
+#### 应用场景-最短路径问题  
+
+![image-20220417214109042](数据结构与算法-SHT.assets/image-20220417214109042.png)
+
+战争时期，胜利乡有 7 个村庄(A, B, C, D, E, F, G) ， 现在有六个邮差，从G点出发，需要分别把邮件分别送到A, B, C , D, E, F 六个村庄。各个村庄的距离用边线表示(权) ，比如A– B距离5公里，问：如何计算出 G 村庄到 其它各个村庄的最短距离?  如果从其它点出发到各个点的最短距离又是多少?  
+
+代码实现先略过。
 
 
 
+### 弗洛伊德算法  
 
+和 Dijkstra 算法一样， 弗洛伊德(Floyd)算法也是一种用于寻找给定的加权图中顶点间最短路径的算法。 该算法名称以创始人之一、 1978 年图灵奖获得者、 斯坦福大学计算机科学系教授罗伯特· 弗洛伊德命名。  
+
+弗洛伊德算法(Floyd)计算图中**各个顶点之间**的最短路径而迪杰斯特拉算法用于计算图中**某一个顶点到其他顶点**的最短路径。  
+
+弗洛伊德算法 VS 迪杰斯特拉算法： 迪杰斯特拉算法通过选定的被访问顶点， 求出从出发访问顶点到其他顶点的最短路径； 弗洛伊德算法中每一个顶点都是出发访问点， 所以需要将每一个顶点看做被访问顶点， 求出从每一个顶点到其他顶点的最短路径。  
+
+算法很巧妙。代码也好写但是时间复杂度较高。
+
+图解分析：
 
