@@ -1,5 +1,3 @@
-
-
 # 数据结构
 
 学习方法：笔记为主，视频为辅，后期加以leetcode刷题。
@@ -2955,9 +2953,122 @@ class EData{
 
 ![image-20220428205218232](数据结构与算法-SHT.assets/image-20220428205218232.png)
 
-问题：多跳的怎么办？C到D？
+```java
+public class FloydAlgorithm {
+    public static void main(String[] args) {
+        char[] vertex={'A','B','C','D','E','F','G'};
+        int[][] matrix=new int[vertex.length][vertex.length];
+        final int N=65536;
+        matrix[0]=new int[]{0,5,7,N,N,N,2};
+        matrix[1]=new int[]{5,0,N,9,N,N,3};
+        matrix[2]=new int[]{7,N,0,N,8,N,N};
+        matrix[3]=new int[]{N,9,N,0,N,4,N};
+        matrix[4]=new int[]{N,N,8,N,0,5,4};
+        matrix[5]=new int[]{N,N,N,4,5,0,6};
+        matrix[6]=new int[]{2,3,N,N,4,6,0};
+        Graph graph = new Graph(vertex.length, matrix, vertex);
+        graph.show();
+        graph.floyd();
+        graph.show();
+
+    }
+
+}
+
+class Graph{
+    private char[] vertex;//存放顶点的数组
+    private int[][] dis;//保存距离
+    private int[][] pre;//到达目标顶点的前驱顶点
+    
+    /**
+     *
+     * @param length 大小(顶点个数)
+     * @param matrix 邻接矩阵
+     * @param vertex 顶点数组
+     */
+    public Graph(int length,int[][] matrix,char[] vertex){
+        this.vertex=vertex;
+        this.dis=matrix;
+        this.pre=new int[length][length];
+        //pre初始化，存放前驱顶点的下标
+        for (int i = 0; i < length; i++) {
+            Arrays.fill(pre[i],i);
+        }
+    }
+    
+    public void show(){
+        System.out.println("前驱");
+        for (int k = 0; k < dis.length; k++) {
+            for (int i = 0; i < dis.length; i++) {
+                System.out.print(vertex[pre[k][i]]+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("距离");
+        for (int k = 0; k < dis.length; k++) {
+            for (int i = 0; i < dis.length; i++) {
+                System.out.print(dis[k][i]+" ");
+            }
+            System.out.println();
+        }
+    }
+    
+    public void floyd(){
+        int len=0;
+        //中间顶点
+        for (int k = 0; k < dis.length; k++) {
+            //出发顶点
+            for (int i = 0; i < dis.length; i++) {
+                //终点
+                for (int j = 0; j < dis.length; j++) {
+                    len=dis[i][k]+dis[k][j];//i到j等于i到k加k到j
+                    if (len<dis[i][j]){
+                        dis[i][j]=len;
+                        pre[i][j]=pre[k][j];
+                        //pre[i][j]代表要从i走到j时，j的前一步
+                        // 不能用k是因为 pre[k][j]不一定等于k 它等于从k到j的j的前一步 k到j中间可能经过了其他节点
+                    }
+                }
+            }
+        }
+    }
+}
+
+```
+
+问题：
+
+（1）多跳的怎么办？C到D？
+
+答：充分理解前驱节点表的意义。
+
+（2）A为中间顶点，从C到F，C到A+A到F，此时若A到F距离为无穷大（未计算），实际上这条路是最短的？
+
+答：若A到F距离为无穷大则肯定有一个中间节点，后续加入那个中间节点时就会考虑到，因此不会错过。
+
+所有未考虑到的路径，都会在后面某个中间节点的加入时考虑到。
+
+https://zhuanlan.zhihu.com/p/139112162
 
 
 
 ### 马踏棋盘  
 
+也被称为骑士周游问题
+
+将马随机放在国际象棋的 8× 8 棋盘 的某个方格中， 马按走棋规则(马走日字)进行移动。 要求每个方格只进入一次， 走遍棋盘上全部 64 个方格 （不一定绝对有解）。
+
+马踏棋盘问题(骑士周游问题)实际上是图的深度优先搜索(DFS)的应用 。
+
+深度优先搜索=回溯
+
+如果使用回溯（就是深度优先搜索） 来解决， 假如马儿踏了 53 个点，， 发现已经走到尽头， 没办法， 那就只能回退了， 查看其他的路径， 就在棋盘上不停的回溯……   
+
+**优化**：
+
+1.我们获取当前位置，可以走的下一个位置的集合ps
+		2.我们需要对ps中所有的Point的下一步的所有 集合的教目进行非递减排序
+
+每次走下一步走下一步时选择较少的情况，这样回溯的较少，加快算法速度。
+
+代码略
