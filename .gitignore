@@ -1,6 +1,5 @@
-/Leetcode/cmake-build-debug/
-Leetcode/.idea/workspace.xml
-Leetcode/.idea/vcs.xml
-Leetcode/.idea/modules.xml
-Leetcode/.idea/misc.xml
-Leetcode/.idea/Leetcode.iml
+*.iml
+*.xml
+/Leetcode/leetcode/editor/cn/doc/content/
+Leetcode/CMakeLists.txt
+.idea/leetcode/editor.xml

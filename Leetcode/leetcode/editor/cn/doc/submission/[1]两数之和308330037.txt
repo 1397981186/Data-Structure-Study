@@ -1,9 +1,3 @@
-//
-// Created by Mihtop on 2022/5/2.
-//
-#include <vector>
-using namespace std;
-
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -20,3 +14,7 @@ public:
         return answer;
     }
 };
+
+
+//runtime:320 ms
+//memory:9.9 MB
