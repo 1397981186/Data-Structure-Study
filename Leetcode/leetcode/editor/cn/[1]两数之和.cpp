@@ -29,12 +29,12 @@
 
 */
 
-
+#include <unordered_map>
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  		执行耗时:304 ms,击败了26.99% 的C++用户
 		内存消耗:9.8 MB,击败了92.97% 的C++用户
- */
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -52,5 +52,24 @@ public:
         return answer;
     }
 };
+ */
 
+ /**
+* 			执行耗时:8 ms,击败了92.01% 的C++用户
+			内存消耗:10.6 MB,击败了35.28% 的C++用户
+  */
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        std::unordered_map <int,int> map;
+        for(int i=0;i<nums.size();i++){
+            auto it =map.find(target-nums[i]);
+            if(it != map.end()){
+                return {it->second,i};
+            }
+            map.insert(pair(nums[i],i));
+        }
+        return {};
+    }
+};
 //leetcode submit region end(Prohibit modification and deletion)
