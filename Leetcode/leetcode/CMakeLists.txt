@@ -1,4 +1,4 @@
 project(Data-Structure-Study)
 
 
-add_executable(MedianOfTwoSortedArrays ./editor/cn/MedianOfTwoSortedArrays.cpp)
+add_executable(4_MedianOfTwoSortedArrays ./editor/cn/4_MedianOfTwoSortedArrays.cpp)

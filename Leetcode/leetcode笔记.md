@@ -16,9 +16,13 @@ map的使用
 
 ### [LeetCode 4. 寻找两个正序数组的中位数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/median-of-two-sorted-arrays/)
 
+实现时考虑数组的极端情况：为空，为1个值
 
+有序数组容易想到二分查找
 
+![image-20220506211909629](leetcode笔记.assets/image-20220506211909629.png)
 
+https://github.com/azl397985856/leetcode/blob/master/problems/4.median-of-two-sorted-arrays.md
 
 
 
