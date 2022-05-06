@@ -1,3 +1,0 @@
-"D:\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\findMedianSortedArrays.dir/objects.a
-"D:\CLion 2021.1.2\Mingw\MinGW\bin\ar.exe" cr CMakeFiles\findMedianSortedArrays.dir/objects.a @CMakeFiles\findMedianSortedArrays.dir\objects1.rsp
-"D:\CLion 2021.1.2\Mingw\MinGW\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\findMedianSortedArrays.dir/objects.a -Wl,--no-whole-archive -o findMedianSortedArrays.exe -Wl,--out-implib,libfindMedianSortedArrays.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\findMedianSortedArrays.dir\linklibs.rsp

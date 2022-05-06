@@ -47,24 +47,69 @@ public:
         bool flagOdd= true;
         int i=0;
         int j=0;
+        int even1=0;
+        int even2=0;
         double res=0;
+        bool Enough= true;
         if (len%2==0){
             flagOdd=false;
         }
         if (flagOdd){
             int pos=(len-1)/2;
             for (int k = 0; k <= pos; k++) {
-                if (nums1[i]<=nums2[j]){
+                if (nums1[i]<=nums2[j]&&i<nums1.size()-1){
                     res=nums1[i];
                     i++;
-                } else{
+                } else if (nums1[i]>nums2[j]&&j<nums2.size()-1){
+                    res=nums2[j];
+                    j++;
+                }else if(nums1[i]<=nums2[j]&&i==nums1.size()-1&&Enough){
+                    res=nums1[i];
+                    Enough= false;
+                }else if(nums1[i]>nums2[j]&&j==nums2.size()-1&&Enough){
+                    res=nums2[j];
+                    Enough= false;
+                }else if (i<nums1.size()-1){
+                    res=nums1[i];
+                    i++;
+                }else{
                     res=nums2[j];
                     j++;
                 }
             }
             return res;
-        }
-        for (int l = 0; l <nums1.size() ; l++) {
+        }else{
+            int pos1=len/2-1;
+            int pos2=len/2;
+            for (int m = 0; m <= pos2; m++) {
+                if (nums1[i]<=nums2[j]&&i<nums1.size()-1){
+                    if (m==pos1){even1=nums1[i];}
+                    if (m==pos2){even2=nums1[i];}
+                    i++;
+                } else if (nums1[i]>nums2[j]&&j<nums2.size()-1){
+                    if (m==pos1){even1=nums2[j];}
+                    if (m==pos2){even2=nums2[j];}
+                    j++;
+                } else if(nums1[i]<=nums2[j]&&i==nums1.size()-1&&Enough){
+                    if (m==pos1){even1=nums1[i];}
+                    if (m==pos2){even2=nums1[i];}
+                    Enough= false;
+                }else if(nums1[i]>nums2[j]&&j==nums2.size()-1&&Enough){
+                    if (m==pos1){even1=nums2[j];}
+                    if (m==pos2){even2=nums2[j];}
+                    Enough= false;
+                }else if (i<nums1.size()-1){
+                    if (m==pos1){even1=nums1[i];}
+                    if (m==pos2){even2=nums1[i];}
+                    i++;
+                } else{
+                    if (m==pos1){even1=nums2[j];}
+                    if (m==pos2){even2=nums2[j];}
+                    j++;
+                }
+            }
+            res=(double(even1)+double(even2))/2;
+            return res;
         }
         return 0;
 
@@ -77,7 +122,7 @@ int main()
 {
     Solution solution;
     vector<int> nums1={1,2};
-    vector<int> nums2={3};
+    vector<int> nums2={3,4};
     double res;
     res=solution.findMedianSortedArrays(nums1,nums2);
     cout<<"---sre---"<<res<<endl;
