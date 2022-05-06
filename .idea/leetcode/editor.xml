@@ -3,6 +3,17 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com4" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
+              <option name="titleSlug" value="median-of-two-sorted-arrays" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[1]两数之和.cpp">
           <value>
             <LeetcodeEditor>
@@ -39,10 +50,21 @@
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[4]Median of Two Sorted Arrays.cpp">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[4]寻找两个正序数组的中位数.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
               <option name="frontendQuestionId" value="leetcode-cn.com4" />
               <option name="host" value="leetcode-cn.com" />
-              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[4]寻找两个正序数组的中位数.cpp" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
+              <option name="titleSlug" value="median-of-two-sorted-arrays" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[4]median-of-two-sorted-arrays.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com4" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
           </value>
@@ -50,10 +72,10 @@
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[4]寻找两个正序数组的中位数.cpp">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[4]寻找两个正序数组的中位数.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
               <option name="frontendQuestionId" value="leetcode-cn.com4" />
               <option name="host" value="leetcode-cn.com" />
-              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[4]寻找两个正序数组的中位数.cpp" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
           </value>
@@ -88,6 +110,28 @@
               <option name="host" value="leetcode-cn.com" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[7]Reverse Integer.cpp" />
               <option name="titleSlug" value="reverse-integer" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../西电/Program_Study/Data-Structure-Study/Leetcode/leetcode/editor/cn/[4]Median of Two Sorted Arrays.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com4" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
+              <option name="titleSlug" value="median-of-two-sorted-arrays" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../西电/Program_Study/Data-Structure-Study/Leetcode/leetcode/editor/cn/[4]median-of-two-sorted-arrays.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/MedianOfTwoSortedArrays.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com4" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp" />
+              <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
           </value>
         </entry>

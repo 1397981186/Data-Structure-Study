@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Mihtop/Desktop/XiDian/Program_Study/Data-Structure-Study/Leetcode/leetcode/editor/cn/findMedianSortedArrays.cpp
+vector
+-
+vector
+C:/Users/Mihtop/Desktop/XiDian/Program_Study/Data-Structure-Study/Leetcode/leetcode/editor/cn/vector
+

@@ -1,0 +1,3 @@
+"D:\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\[4]median-of-two-sorted-arrays.dir/objects.a
+"D:\CLion 2021.1.2\Mingw\MinGW\bin\ar.exe" cr CMakeFiles\[4]median-of-two-sorted-arrays.dir/objects.a @CMakeFiles\[4]median-of-two-sorted-arrays.dir\objects1.rsp
+"D:\CLion 2021.1.2\Mingw\MinGW\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\[4]median-of-two-sorted-arrays.dir/objects.a -Wl,--no-whole-archive -o [4]median-of-two-sorted-arrays.exe -Wl,--out-implib,lib[4]median-of-two-sorted-arrays.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\[4]median-of-two-sorted-arrays.dir\linklibs.rsp

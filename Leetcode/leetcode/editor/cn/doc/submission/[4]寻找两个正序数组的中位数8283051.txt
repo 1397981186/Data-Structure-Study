@@ -1,0 +1,36 @@
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        n, m = len(nums1), len(nums2)
+        t=last_index1=index1= (m+n) // 2
+        inf = float('inf')
+        while 1:
+            if index1 > n:
+                last_index1 = index1
+                index1 = index1 // 2
+                continue
+            index2 = t - index1
+            if index2 > m:
+                index1 =t-m; continue
+            l1 = nums1[index1-1] if 0 <= index1-1 < n else -inf
+            r1 = nums1[index1] if 0 <= index1 < n else inf
+            l2 = nums2[index2-1] if 0 <= index2-1 < m else -inf
+            r2 = nums2[index2] if 0 <= index2 < m else inf
+
+            # 满足条件后分奇偶进行计算
+            if max(l1,l2) <= min(r1,r2):
+                if (n+m) % 2 != 0: return min(r1,r2)
+                else:return (max(l1,l2) + min(r1,r2)) / float(2)
+                break
+            elif l1 > min(r1,r2):
+                last_index1=index1
+                index1=index1//2
+            else:
+                index1=(last_index1+index1)//2
+        
+# runtime:72 ms
+# memory:N/A
