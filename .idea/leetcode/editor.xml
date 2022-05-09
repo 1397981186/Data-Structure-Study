@@ -14,6 +14,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/16_ThreeSumClosest.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/16_ThreeSumClosest.md" />
+              <option name="frontendQuestionId" value="leetcode-cn.com16" />
+              <option name="host" value="leetcode-cn.com" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/16_ThreeSumClosest.cpp" />
+              <option name="titleSlug" value="3sum-closest" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4MedianOfTwoSortedArrays.cpp">
           <value>
             <LeetcodeEditor>
