@@ -27,14 +27,6 @@ Output: []
 
 
  修改for循环中的vector时需要小心做出的修改对迭代器的影响
-
- 本题解法：
-     哈希法和双指针法
-     两者时间复杂度可以做到$O(n^2)$，但哈希法编写起来还是比较费时的，因为不好做剪枝操作。实际不好完成。
-     建议双指针法
- 通用收获：
-     排序是否能够简单化问题
-
 */
 
 
@@ -47,7 +39,7 @@ using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
-哈希法，剪枝失败
+哈希法，剪枝失败，剪枝成功的见md笔记。
 class Solution {
 public:
     bool IfDulp(vector<vector<int>> res,int num1,int num2,int num3){
@@ -141,37 +133,60 @@ public:
 };
 
 */
-
+/**
+			执行耗时:88 ms,击败了44.65% 的C++用户
+			内存消耗:19.5 MB,击败了45.47% 的C++用户
+*/
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> result;
         sort(nums.begin(), nums.end());
         // 找出a + b + c = 0
-        // a = nums[i], b = nums[j], c = -(a + b)
+        // a = nums[i], b = nums[left], c = nums[right]
         for (int i = 0; i < nums.size(); i++) {
-            // 排序之后如果第一个元素已经大于零，那么不可能凑成三元组
+            // 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果就可以了
             if (nums[i] > 0) {
-                break;
+                return result;
             }
-            if (i > 0 && nums[i] == nums[i - 1]) { //三元组元素a去重,  前一个
+            // 错误去重方法，将会漏掉-1,-1,2 这种情况
+            /*
+            if (nums[i] == nums[i + 1]) {
                 continue;
             }
-            unordered_set<int> set;
-            for (int j = i + 1; j < nums.size(); j++) {
-                if (j > i + 2
-                    && nums[j] == nums[j-1]
-                    && nums[j-1] == nums[j-2]) { // 三元组元素b去重，  前两个
-                    continue;
-                }
-                int c = 0 - (nums[i] + nums[j]);
-                if (set.find(c) != set.end()) {//set中找到了c
-                    result.push_back({nums[i], nums[j], c});
-                    set.erase(c);// 三元组元素c去重
-                } else {//没找到
-                    set.insert(nums[j]);
+            */
+            // 正确去重方法
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1;
+            int right = nums.size() - 1;
+            while (right > left) {
+                // 去重复逻辑如果放在这里，0，0，0 的情况，可能直接导致 right<=left 了，从而漏掉了 0,0,0 这种三元组
+                /*
+                while (right > left && nums[right] == nums[right - 1]) right--;
+                while (right > left && nums[left] == nums[left + 1]) left++;
+                */
+                if (nums[i] + nums[left] + nums[right] > 0) {
+                    right--;
+                    // 当前元素不合适了，可以去重
+                    while (left < right && nums[right] == nums[right + 1]) right--;
+                } else if (nums[i] + nums[left] + nums[right] < 0) {
+                    left++;
+                    // 不合适，去重
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                } else {
+                    result.push_back(vector<int>{nums[i], nums[left], nums[right]});
+                    // 去重逻辑应该放在找到一个三元组之后
+                    while (right > left && nums[right] == nums[right - 1]) right--;
+                    while (right > left && nums[left] == nums[left + 1]) left++;
+
+                    // 找到答案时，双指针同时收缩
+                    right--;
+                    left++;
                 }
             }
+
         }
         return result;
     }

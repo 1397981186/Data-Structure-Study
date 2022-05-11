@@ -8,17 +8,61 @@
 
 ### [LeetCode 1. 两数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/two-sum/)
 
-c++与c#的区别
+```c++
+给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。
+ 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+ 你可以按任意顺序返回答案。 
 
-vector：https://www.jianshu.com/p/bc1b298af5e9
+示例 1：
+输入：nums = [2,7,11,15], target = 9
+输出：[0,1]
+解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+ 
 
-map的使用
+ 示例 2：
+输入：nums = [3,2,4], target = 6
+输出：[1,2]
+ 
+
+ 示例 3：
+输入：nums = [3,3], target = 6
+输出：[0,1]
+
+ 提示：
+ 2 <= nums.length <= 10⁴ 
+ -10⁹ <= nums[i] <= 10⁹ 
+ -10⁹ <= target <= 10⁹ 
+ 只会存在一个有效答案 
+```
+
+- c++与c#的区别
+
+- map的使用：利用map的二分查找快速找到结果
+
 
 ### [LeetCode 4. 寻找两个正序数组的中位数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/median-of-two-sorted-arrays/)
 
-实现时考虑数组的极端情况：为空，为1个值
+```c++
+Given two sorted arrays nums1 and nums2 of size m and n respectively, return 
+the median of the two sorted arrays.  
 
-有序数组容易想到二分查找
+Example 1: 
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000
+Explanation: merged array = [1,2,3] and median is 2.
+ 
+
+ Example 2: 
+Input: nums1 = [1,2], nums2 = [3,4]
+Output: 2.50000
+Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+```
+
+- 实现时考虑数组的极端情况：为空，为1个值
+
+
+- 有序数组容易想到二分查找
+
 
 ![image-20220506211909629](leetcode笔记.assets/image-20220506211909629.png)
 
@@ -27,6 +71,68 @@ https://github.com/azl397985856/leetcode/blob/master/problems/4.median-of-two-so
 
 
 ### [LeetCode 15. 三数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/3sum/)
+
+```c++
+ Example 1: 
+ Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+ Example 2: 
+ Input: nums = []
+Output: []
+ Example 3: 
+ Input: nums = [0]
+Output: []
+```
+
+两种方法，哈希法和双指针法， 两者时间复杂度可以做到$O(n^2)$，但哈希法编写起来还是比较费时的，因为不好做剪枝操作。实际不好完成。
+
+**建议双指针法**
+
+- 要常思考排序是否能够简单化问题
+- stl中的set的灵活使用
+
+哈希法:
+
+用到的剪枝技巧：首先set元素不会重复，然后将数组排序，则可利用逻辑使得本题在添加时就避免了再新建一个方法专门用于查重的过程
+
+```C++
+class Solution {//哈希法，不建议，但是值得学习
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(), nums.end());
+        // 找出a + b + c = 0
+        // a = nums[i], b = nums[j], c = -(a + b)
+        for (int i = 0; i < nums.size(); i++) {
+            // 排序之后如果第一个元素已经大于零，那么不可能凑成三元组
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) { //三元组元素a去重,  前一个
+                continue;
+            }
+            unordered_set<int> set;
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (j > i + 2
+                    && nums[j] == nums[j-1]
+                    && nums[j-1] == nums[j-2]) { // 三元组元素b去重，  前两个
+                    continue;
+                }
+                int c = 0 - (nums[i] + nums[j]);
+                if (set.find(c) != set.end()) {//set中找到了c
+                    result.push_back({nums[i], nums[j], c});
+                    set.erase(c);// 三元组元素c去重
+                } else {//没找到
+                    set.insert(nums[j]);
+                }
+            }
+        }
+        return result;
+    }
+};
+```
+
+
 
 ### [LeetCode 75. 颜色分类](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sort-colors/)
 

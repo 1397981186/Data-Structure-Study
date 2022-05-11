@@ -7,8 +7,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/15_ThreeSum.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com15" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn15" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/15_ThreeSum.cpp" />
               <option name="titleSlug" value="3sum" />
             </LeetcodeEditor>
@@ -18,8 +18,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/16_ThreeSumClosest.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com16" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn16" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/16_ThreeSumClosest.cpp" />
               <option name="titleSlug" value="3sum-closest" />
             </LeetcodeEditor>
@@ -29,8 +29,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -40,10 +40,21 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/75_SortColors.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/75_SortColors.md" />
+              <option name="frontendQuestionId" value="leetcode.cn75" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/75_SortColors.cpp" />
+              <option name="titleSlug" value="sort-colors" />
             </LeetcodeEditor>
           </value>
         </entry>
@@ -51,8 +62,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -62,8 +73,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[1]两数之和.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com1" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn1" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[1]两数之和.cpp" />
               <option name="titleSlug" value="two-sum" />
             </LeetcodeEditor>
@@ -73,8 +84,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[2]两数相加.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com2" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn2" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[2]两数相加.cpp" />
               <option name="titleSlug" value="add-two-numbers" />
             </LeetcodeEditor>
@@ -84,8 +95,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[3]无重复字符的最长子串.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com3" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn3" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[3]无重复字符的最长子串.cpp" />
               <option name="titleSlug" value="longest-substring-without-repeating-characters" />
             </LeetcodeEditor>
@@ -95,8 +106,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -106,8 +117,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -117,8 +128,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -128,8 +139,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[5]最长回文子串.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com5" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn5" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[5]最长回文子串.cpp" />
               <option name="titleSlug" value="longest-palindromic-substring" />
             </LeetcodeEditor>
@@ -139,8 +150,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[6]Z 字形变换.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com6" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn6" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[6]Z 字形变换.cpp" />
               <option name="titleSlug" value="zigzag-conversion" />
             </LeetcodeEditor>
@@ -150,8 +161,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[7]Reverse Integer.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com7" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn7" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[7]Reverse Integer.cpp" />
               <option name="titleSlug" value="reverse-integer" />
             </LeetcodeEditor>
@@ -161,8 +172,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
@@ -172,8 +183,8 @@
           <value>
             <LeetcodeEditor>
               <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/4_MedianOfTwoSortedArrays.md" />
-              <option name="frontendQuestionId" value="leetcode-cn.com4" />
-              <option name="host" value="leetcode-cn.com" />
+              <option name="frontendQuestionId" value="leetcode.cn4" />
+              <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4_MedianOfTwoSortedArrays.cpp" />
               <option name="titleSlug" value="median-of-two-sorted-arrays" />
             </LeetcodeEditor>
