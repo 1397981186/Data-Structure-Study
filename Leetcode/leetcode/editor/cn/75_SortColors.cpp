@@ -27,11 +27,14 @@ Output: [0,1,2]
 extra space? 
  Related Topics 数组 双指针 排序 👍 1266 👎 0
 
+ 2 0 1 2
+ 双指针，三指针？ 一个在最后，一个在开头？
+
 */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
+//#include <algorithm>
 #include <unordered_set>
 
 using namespace std;
@@ -48,10 +51,10 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums1={1,2};
-    vector<int> nums2={3};
-    double res;
-    res=solution.sortColors(nums1);
-    cout<<"---sre---"<<res<<endl;
+    vector<int> nums={1,2};
+    solution.sortColors(nums);
+    for (int i = 0; i < nums.size(); i++) {
+        cout<<" "<<nums[i]<<endl;
+    }
     return 0;
 }

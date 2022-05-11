@@ -73,12 +73,18 @@ https://github.com/azl397985856/leetcode/blob/master/problems/4.median-of-two-so
 ### [LeetCode 15. 三数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/3sum/)
 
 ```c++
- Example 1: 
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]]
+ such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0. 
+ Notice that the solution set must not contain duplicate triplets. 
+
+Example 1: 
  Input: nums = [-1,0,1,2,-1,-4]
 Output: [[-1,-1,2],[-1,0,1]]
+
  Example 2: 
  Input: nums = []
 Output: []
+
  Example 3: 
  Input: nums = [0]
 Output: []
@@ -132,9 +138,33 @@ public:
 };
 ```
 
-
-
 ### [LeetCode 75. 颜色分类](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sort-colors/)
+
+```c++
+Given an array nums with n objects colored red, white, or blue, sort them in-
+place so that objects of the same color are adjacent, with the colors in the order 
+red, white, and blue. 
+
+ We will use the integers 0, 1, and 2 to represent the color red, white, and 
+blue, respectively. 
+
+ You must solve this problem without using the library's sort function. 
+
+ 
+ Example 1: 
+Input: nums = [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+ 
+ Example 2: 
+Input: nums = [2,0,1]
+Output: [0,1,2]
+ 
+ 
+ Constraints: 
+ n == nums.length 
+ 1 <= n <= 300 
+ nums[i] is either 0, 1, or 2. 
+```
 
 ### [LeetCode 76. 最小覆盖子串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/minimum-window-substring/)
 
