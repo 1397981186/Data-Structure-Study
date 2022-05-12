@@ -28,7 +28,9 @@ extra space?
  Related Topics 数组 双指针 排序 👍 1266 👎 0
 
  2 0 1 2
- 双指针，三指针？ 一个在最后，一个在开头？
+ 挡板法:两个挡板，前面的挡板不允许右边有0，后面的不允许左边有2
+
+ 指针不仅可以用来指向数组，还可以用来当做挡板.实现时，挡板本质上是交换+移位
 
 */
 
@@ -43,6 +45,25 @@ using namespace std;
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
+        int first,it=0 ;
+        int second = nums.size()-1;
+        int temp;
+        for (int i = 0; i <= nums.size()-1; i++) {
+            if (nums[it]==2&&it<=second){
+                temp=nums[second];
+                nums[second]=2;
+                nums[it]=temp;
+                second--;
+            } else if(nums[it]==0&&it>=first){
+                temp=nums[first];
+                nums[first]=0;
+                nums[it]=temp;
+                first++;
+                it++;
+            }else{
+                it++;
+            }
+        }
         
     }
 };
@@ -51,10 +72,10 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums={1,2};
+    vector<int> nums={2,0,1};
     solution.sortColors(nums);
     for (int i = 0; i < nums.size(); i++) {
-        cout<<" "<<nums[i]<<endl;
+        cout<<" "<<nums[i];
     }
     return 0;
 }
