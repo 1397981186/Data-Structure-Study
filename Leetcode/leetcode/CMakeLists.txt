@@ -5,3 +5,4 @@ add_executable(4_MedianOfTwoSortedArrays ./editor/cn/4_MedianOfTwoSortedArrays.c
 add_executable(15_ThreeSum ./editor/cn/15_ThreeSum.cpp)
 add_executable(75_SortColors ./editor/cn/75_SortColors.cpp)
 add_executable(76_MinimumWindowSubstring ./editor/cn/76_MinimumWindowSubstring.cpp)
+add_executable(142_LinkedListCycleIi ./editor/cn/142_LinkedListCycleIi.cpp)
