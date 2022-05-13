@@ -166,6 +166,12 @@ Output: [0,1,2]
  nums[i] is either 0, 1, or 2. 
 ```
 
+ 挡板法:两个挡板，前面的挡板不允许右边有0，后面的不允许左边有2
+
+ 指针不仅可以用来指向数组，还可以用来当做挡板。实现时，挡板本质上是交换+移位
+
+
+
 ### [LeetCode 76. 最小覆盖子串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/minimum-window-substring/)
 
 ### [LeetCode 142. 环形链表 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/linked-list-cycle-ii/)

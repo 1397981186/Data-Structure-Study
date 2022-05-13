@@ -42,10 +42,14 @@ extra space?
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
+/**
+			执行耗时:4 ms,击败了40.58% 的C++用户
+			内存消耗:8.1 MB,击败了22.47% 的C++用户
+*/
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        int first,it=0 ;
+        int first=0,it=0 ;
         int second = nums.size()-1;
         int temp;
         for (int i = 0; i <= nums.size()-1; i++) {
@@ -72,7 +76,7 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums={2,0,1};
+    vector<int> nums={2,0,2,1,1,0};
     solution.sortColors(nums);
     for (int i = 0; i < nums.size(); i++) {
         cout<<" "<<nums[i];
