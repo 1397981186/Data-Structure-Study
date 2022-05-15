@@ -55,17 +55,25 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        ListNode *nextNode = head;
-        for (int i = 0; i <= 10; i++) {
-            cout<<nextNode->val<<endl;
-            nextNode=nextNode->next;
+        ListNode *slowNode = head;
+        ListNode *fastNode = slowNode->next;
+
+        while (fastNode!=slowNode){
+            if (fastNode==NULL||slowNode==NULL){
+                return NULL;
+            }
+            fastNode=fastNode->next->next;
+            slowNode=slowNode->next;
         }
 
-
-
-        return nextNode;
-
-
+        fastNode=head;
+        slowNode=slowNode->next;
+        while (fastNode!=slowNode){
+            fastNode=fastNode->next;
+            slowNode=slowNode->next;
+        }
+        
+        return fastNode;
     }
 };
 
