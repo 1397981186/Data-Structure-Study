@@ -52,14 +52,22 @@ struct ListNode {
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+/**
+			执行耗时:8 ms,击败了72.73% 的C++用户
+			内存消耗:7.4 MB,击败了73.90% 的C++用户
+*/
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
+        if (head==NULL||head->next==NULL){
+            return NULL;
+        }
         ListNode *slowNode = head;
         ListNode *fastNode = slowNode->next;
 
         while (fastNode!=slowNode){
-            if (fastNode==NULL||slowNode==NULL){
+            if (fastNode==NULL||slowNode==NULL||fastNode->next==NULL){
                 return NULL;
             }
             fastNode=fastNode->next->next;
@@ -72,7 +80,7 @@ public:
             fastNode=fastNode->next;
             slowNode=slowNode->next;
         }
-        
+
         return fastNode;
     }
 };
