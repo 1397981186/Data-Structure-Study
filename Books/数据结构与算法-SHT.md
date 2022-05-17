@@ -288,6 +288,11 @@ while(cur != null) {
 	reverseHead.next = cur; //将 cur 连接到新的链表上
 	cur = next;//让 cur 后移
 }
+比如一开始加入2
+    next=5
+    2.next=Null（一开始reverseHeader后面是null）
+    reverseHead.next=2
+    cur=5//移到5
 ```
 
 ​	**d 从尾到头打印单链表**   
