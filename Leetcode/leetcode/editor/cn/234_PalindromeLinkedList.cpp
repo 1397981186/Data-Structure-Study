@@ -46,6 +46,11 @@ struct ListNode {
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+/**
+			执行耗时:152 ms,击败了95.20% 的C++用户
+			内存消耗:111.4 MB,击败了71.74% 的C++用户
+*/
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
@@ -63,18 +68,40 @@ public:
         ListNode* slowNode=head;
         ListNode* fastNode=slowNode->next;
         int cnt=2;
-        while (fastNode->next!=NULL&&fastNode!=NULL){
+        while (fastNode->next&&fastNode){
             slowNode=slowNode->next;
             fastNode=fastNode->next->next;
             cnt+=2;
         }
-        if (fastNode==NULL){//实际为奇数，cnt多加了
-            cnt--;
+
+        //这里null no pointer??   (fastNode->next&&fastNode)  (fastNode->next!=NULL)  diff ??
+        if (fastNode->next!=NULL){//实际为奇数，cnt少加了
+            cnt--;//这时如果总共是7个节点，slow为3，fast6；如果6，则slow3，fast6
         }
-        cout<<cnt;
+//        cout<<cnt<<endl;
 
-        return false;
+        fastNode=head;//fast指向头
+//        ListNode* reverseHeader= ListNode(); 注意链表的新建方法，有指针就有new. 区别于类
+        ListNode* reverseHeader = new ListNode();
+        ListNode* tempNode= nullptr;
+        slowNode=slowNode->next;//将slow移到后半段
+        while(slowNode!=NULL){//反转slowNode
+            tempNode=slowNode->next;
+            slowNode->next=reverseHeader->next;
+            reverseHeader->next=slowNode;
+            slowNode=tempNode;
+        }
+        slowNode=reverseHeader->next;
+//        cout<<"here"<<endl;
+        for (int i = 0; i <= cnt / 2-1; i++) {
+            if (slowNode->val!=fastNode->val){
+                return false;
+            }
+            slowNode=slowNode->next;
+            fastNode=fastNode->next;
+        }
 
+        return true;
 
     }
 };
