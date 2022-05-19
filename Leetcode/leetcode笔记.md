@@ -307,11 +307,97 @@ res=minLen<(i-left+1)? res:s.substr(left,minLen);
  Related Topics 栈 递归 链表 双指针 👍 1387 👎 0
 ```
 
+此题，有效锻炼了链表相关的代码能力。详细见代码注释
 
+```c++
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        if (head==NULL){
+            return false;
+        }
+        if (head->next==NULL){
+            return true;
+        }
+//        ListNode slowNode=head;
+        //理解：为什么链表声明需要用到指针
+        //不用指针初始化的时候就出问题辣，指针允许指向空，而且指针本身是莫得特定的初始化行为的（你可以把他当一个整型数值来看），它只是指向了一个内存区域，并被标记了该内存数据的“样板”（也就是类型，把类型看作一种模具）；
+        //但是如果他不是指针而是常规变量呢，他需要初始化（无论他初始化成0还是初始化成随机值，他都得初始化）。然后初始化的时候发现，哦，自己体内还有一个跟自己一样的类型；再然后初始化这个成员，发现，哦，这个成员里面还有一个跟自己一样的类型（然后无限套娃...），最后他就炸了。
+
+        ListNode* slowNode=head;
+        ListNode* fastNode=slowNode->next;
+        int cnt=2;
+        while (fastNode->next!=NULL&&fastNode->next->next!=NULL){//先fastNode->next，再fastNode->next->next，不然会出现空指针异常
+            slowNode=slowNode->next;
+            fastNode=fastNode->next->next;
+            cnt+=2;
+        }
+        if (fastNode->next!=NULL){//实际为奇数，cnt少加了
+            cnt++;//这时如果总共是7个节点，slow为3，fast6；如果6，则slow3，fast6
+        }
+//        cout<<cnt<<endl;
+
+        fastNode=head;//fast指向头
+//        ListNode* reverseHeader= ListNode(); 注意链表的新建方法，有指针就有new. 区别于类
+        ListNode* reverseHeader = new ListNode();
+        ListNode* tempNode= nullptr;
+        slowNode=slowNode->next;//将slow移到后半段
+        while(slowNode!=NULL){//反转slowNode
+            tempNode=slowNode->next;
+            slowNode->next=reverseHeader->next;
+            reverseHeader->next=slowNode;
+            slowNode=tempNode;
+        }
+        slowNode=reverseHeader->next;
+//        cout<<"here"<<endl;
+        for (int i = 0; i <= cnt / 2-1; i++) {
+            if (slowNode->val!=fastNode->val){
+                return false;
+            }
+            slowNode=slowNode->next;
+            fastNode=fastNode->next;
+        }
+
+        return true;
+
+    }
+};
+```
 
 
 
 ### [LeetCode 283. 移动零](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/move-zeroes/)
+
+```
+/**
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 
+
+ 请注意 ，必须在不复制数组的情况下原地对数组进行操作。 
+
+
+ 示例 1:
+输入: nums = [0,1,0,3,12]
+输出: [1,3,12,0,0]
+ 
+
+ 示例 2:
+输入: nums = [0]
+输出: [0] 
+
+ 
+ 提示:
+ 1 <= nums.length <= 10⁴ 
+ -2³¹ <= nums[i] <= 2³¹ - 1 
+
+ 进阶：你能尽量减少完成的操作次数吗？ 
+ Related Topics 数组 双指针 👍 1596 👎 0
+
+*/
+```
+
+
+
+
 
 ## **链表**
 
