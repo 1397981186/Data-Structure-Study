@@ -21,6 +21,9 @@
  进阶：你能尽量减少完成的操作次数吗？ 
  Related Topics 数组 双指针 👍 1596 👎 0
 
+ 啊呦，写的真垃
+ 怎么总是有问题，需要反思一下
+
 */
 
 #include <iostream>
@@ -30,9 +33,18 @@
 #include<map>
 
 using namespace std;
+/**
+			Solution0
+			执行耗时:24 ms,击败了36.10% 的C++用户
+			内存消耗:19.1 MB,击败了5.15% 的C++用户
+
+            Solution
+			执行耗时:16 ms,击败了87.31% 的C++用户
+			内存消耗:18.7 MB,击败了68.33% 的C++用户
+*/
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution0 {
 public:
     void moveZeroes(vector<int>& nums) {
         int cntAll=0;
@@ -48,11 +60,67 @@ public:
 //            cout<<zeroPos[i]<<" ";
 //        }
 //        cout<<endl;
+
         int zeroIt = 0;
-        for (int i = 0; i <= zeroPos.size(); i++) {
-            if ()
+        int zeroItMax = zeroPos.size()-1;
+        if (nums.size()>1&&zeroPos.size()>0){
+            for (int i = 0; i <= nums.size()-1; i++) {
+//                if (nums[i]!=0&&zeroIt<zeroItMax&&i>zeroPos[zeroIt]&&i<zeroPos[zeroIt+1]){
+//                    cout<<"here 1"<<endl;
+//                    nums[i-(zeroIt+1)]=nums[i];
+//                }else if(nums[i]!=0&&zeroIt<zeroItMax&&i>zeroPos[zeroIt+1]){
+//                    cout<<"here 2"<<endl;
+//                    zeroIt++;
+//                    nums[i-(zeroIt+1)]=nums[i];
+//                }else if(nums[i]!=0&&zeroIt==zeroItMax&&i>zeroPos[zeroIt]){
+//                    cout<<"here 3"<<endl;
+//                    nums[i-(zeroIt+1)]=nums[i];
+//                }else if (i>=zeroPos[zeroIt]){
+//                    cout<<"here 4"<<endl;
+//                    zeroIt++;
+//                }
+//当三次else if都不行或者感觉逻辑有点混乱时，就要考虑是不是该换个思路
+                if(i>zeroPos[zeroIt]){
+                    nums[i-zeroIt-1]=nums[i];
+                }
+                if(zeroIt!=zeroItMax&&i==zeroPos[zeroIt+1]){//i==zeroPos[zeroIt+1]&&zeroIt!=zeroItMax不要写反了，不然会报错
+                    zeroIt++;
+                }
+            }
+
+            for (int k = 0; k <= nums.size() - 1; k++) {
+                cout<<nums[k]<<" ";
+            }
+            cout<<endl;
+
+            for (int j = nums.size()- zeroPos.size(); j <= nums.size()-1; j++) {
+                nums[j]=0;
+            }
+
         }
 
+    }
+};
+
+//快慢指针一遍过
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int fastIt=0;
+        int slowIt=0;
+        int cnt=0;
+        for (int i = 0; i <= nums.size() - 1; i++) {
+            if(nums[i]==0){
+                fastIt++;
+            }else{
+                nums[slowIt]=nums[fastIt];
+                fastIt++;
+                slowIt++;
+            }
+        }
+        for (int j = slowIt; j <= nums.size() - 1; j++) {
+            nums[j]=0;
+        }
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -60,10 +128,11 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums={1,2,0,1,2,3,0,0,0,1};
+    vector<int> nums={0,1,0,3,12};
+//    vector<int> nums={0};
     solution.moveZeroes(nums);
     for (int i = 0; i <= nums.size()-1; i++) {
-        cout<<nums[i];
+        cout<<nums[i]<<" ";
     }
 
     return 0;
