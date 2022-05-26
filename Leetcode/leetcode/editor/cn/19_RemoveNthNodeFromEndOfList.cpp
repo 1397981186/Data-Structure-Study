@@ -33,6 +33,13 @@
 
 using namespace std;
 
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
@@ -44,19 +51,30 @@ using namespace std;
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+/**
+			执行耗时:4 ms,击败了77.59% 的C++用户
+			内存消耗:10.3 MB,击败了73.82% 的C++用户
+*/
 
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-
+        ListNode* leftNode=head;
+        ListNode* rightNode=head;
+        for (int i = 0; i <= n-1; i++) {
+            if(rightNode->next!=NULL){
+                rightNode=rightNode->next;
+            }else{//n=size
+                return head->next;
+            }
+        }
+        while (rightNode->next!=NULL){
+            leftNode=leftNode->next;
+            rightNode=rightNode->next;
+        }
+        //leftnode at 倒数n+1
+        leftNode->next=leftNode->next->next;
+        return head;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)

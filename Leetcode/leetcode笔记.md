@@ -526,9 +526,38 @@ public:
 */
 ```
 
+**可以设置一个虚拟头结点**，这样原链表的所有节点就都可以按照统一的方式进行移除了。return 头结点的时候，别忘了 `return dummyNode->next;`， 这才是新的头结点。
 
+代码（自己未用虚拟头节点）
 
+```c++
+/**
+			执行耗时:4 ms,击败了77.59% 的C++用户
+			内存消耗:10.3 MB,击败了73.82% 的C++用户
+*/
 
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* leftNode=head;
+        ListNode* rightNode=head;
+        for (int i = 0; i <= n-1; i++) {
+            if(rightNode->next!=NULL){
+                rightNode=rightNode->next;
+            }else{//n=size
+                return head->next;
+            }
+        }
+        while (rightNode->next!=NULL){
+            leftNode=leftNode->next;
+            rightNode=rightNode->next;
+        }
+        //leftnode at 倒数n+1
+        leftNode->next=leftNode->next->next;
+        return head;
+    }
+};
+```
 
 ### [LeetCode 148. 排序链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sort-list/)
 
