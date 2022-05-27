@@ -590,7 +590,9 @@ public:
 */
 ```
 
+https://leetcode.cn/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/
 
+https://leetcode.cn/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 
 
 
