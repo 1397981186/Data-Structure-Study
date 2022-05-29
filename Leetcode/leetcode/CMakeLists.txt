@@ -10,3 +10,4 @@ add_executable(234_PalindromeLinkedList ./editor/cn/234_PalindromeLinkedList.cpp
 add_executable(283_MoveZeroes ./editor/cn/283_MoveZeroes.cpp)
 add_executable(19_RemoveNthNodeFromEndOfList ./editor/cn/19_RemoveNthNodeFromEndOfList.cpp)
 add_executable(148_SortList ./editor/cn/148_SortList.cpp)
+add_executable(160_IntersectionOfTwoLinkedLists ./editor/cn/160_IntersectionOfTwoLinkedLists.cpp)

@@ -596,6 +596,7 @@ public:
 
 - https://leetcode.cn/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/
 - https://leetcode.cn/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
+- 另，关于空间复杂度的思考：应该是指为了实现这个功能额外需要使用的开销，本身已有链表的存储开销不算在内？
 
 此题中关于解题及程序的收获
 
@@ -622,7 +623,7 @@ public:
         }
         pre->next = NULL;//以slow为分界截断
 
-        return merge(sortList(head), sortList(slow));//
+        return merge(sortList(head), sortList(slow));//递归需要很多的空间来存储每一层的结果
 
     }
 
@@ -665,7 +666,7 @@ public:
             p = p->next;
         }
 
-        for (int size = 1; size < length; size <<= 1) {
+        for (int size = 1; size < length; size <<= 1) {//迭代，常数级的开销
             auto cur = dummyHead.next;
             auto tail = &dummyHead;
 
@@ -717,6 +718,12 @@ public:
 ```
 
 ### [LeetCode 160. 相交链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+![image-20220529133042266](leetcode笔记.assets/image-20220529133042266.png)
+
+![image-20220529133100061](leetcode笔记.assets/image-20220529133100061.png)
+
+![image-20220529133118302](leetcode笔记.assets/image-20220529133118302.png)
 
 
 
