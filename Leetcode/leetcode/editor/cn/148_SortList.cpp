@@ -21,8 +21,7 @@
  进阶：你可以在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序吗？ 
  Related Topics 链表 双指针 分治 排序 归并排序 👍 1623 👎 0
 
- 题目限定了时间必须为O(nlgn)，符合要求只有快速排序，归并排序，堆排序，而根据单链表的特点，最适于用归并排序。为啥呢？这是由于链表自身的特点决定的(因为是链表，所以不可以运用到随机访问的特性，所以使用归并排序)
- 快慢指针找中点
+
 */
 
 #include <iostream>
@@ -47,6 +46,9 @@ struct ListNode {
 			执行耗时:180 ms,击败了14.04% 的C++用户
 			内存消耗:72.4 MB,击败了5.00% 的C++用户
 
+			Solution
+			执行耗时:148 ms,击败了26.31% 的C++用户
+			内存消耗:49.7 MB,击败了28.28% 的C++用户
 
 */
 
@@ -97,66 +99,66 @@ public:
  */
 class Solution {
 public:
-    ListNode *sortList(ListNode *head) {
-        if (head == nullptr) {
-            return head;
-        }
+    ListNode* sortList(ListNode* head) {
+        ListNode dummyHead(0);
+        dummyHead.next = head;
+        auto p = head;
         int length = 0;
-        ListNode *node = head;
-        while (node != nullptr) {
-            length++;
-            node = node->next;
+        while (p) {
+            ++length;
+            p = p->next;
         }
-        ListNode *dummyHead = new ListNode(0, head);
-        for (int subLength = 1; subLength < length; subLength <<= 1) {
-            ListNode *prev = dummyHead, *curr = dummyHead->next;
-            while (curr != nullptr) {
-                ListNode *head1 = curr;
-                for (int i = 1; i < subLength && curr->next != nullptr; i++) {
-                    curr = curr->next;
+
+        for (int size = 1; size < length; size <<= 1) {
+            auto cur = dummyHead.next;
+            auto tail = &dummyHead;
+
+            while (cur) {
+                auto left = cur;
+                auto right = cut(left, size); // left->@->@ right->@->@->@...
+                cur = cut(right, size); // left->@->@ right->@->@  cur->@->...
+
+                tail->next = merge(left, right);
+                while (tail->next) {
+                    tail = tail->next;
                 }
-                ListNode *head2 = curr->next;
-                curr->next = nullptr;
-                curr = head2;
-                for (int i = 1; i < subLength && curr != nullptr && curr->next != nullptr; i++) {
-                    curr = curr->next;
-                }
-                ListNode *next = nullptr;
-                if (curr != nullptr) {
-                    next = curr->next;
-                    curr->next = nullptr;
-                }
-                ListNode *merged = merge(head1, head2);
-                prev->next = merged;
-                while (prev->next != nullptr) {
-                    prev = prev->next;
-                }
-                curr = next;
             }
         }
-        return dummyHead->next;
+        return dummyHead.next;
     }
 
-    ListNode *merge(ListNode *head1, ListNode *head2) {
-        ListNode *dummyHead = new ListNode(0);
-        ListNode *temp = dummyHead, *temp1 = head1, *temp2 = head2;
-        while (temp1 != nullptr && temp2 != nullptr) {
-            if (temp1->val <= temp2->val) {
-                temp->next = temp1;
-                temp1 = temp1->next;
+    ListNode* cut(ListNode* head, int n) {
+        auto p = head;
+        while (--n && p) {
+            p = p->next;
+        }
+
+        if (!p) return nullptr;
+
+        auto next = p->next;
+        p->next = nullptr;
+        return next;
+    }
+
+    ListNode* merge(ListNode* l1, ListNode* l2) {
+        ListNode dummyHead(0);
+        auto p = &dummyHead;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                p->next = l1;
+                p = l1;
+                l1 = l1->next;
             } else {
-                temp->next = temp2;
-                temp2 = temp2->next;
+                p->next = l2;
+                p = l2;
+                l2 = l2->next;
             }
-            temp = temp->next;
         }
-        if (temp1 != nullptr) {
-            temp->next = temp1;
-        } else if (temp2 != nullptr) {
-            temp->next = temp2;
-        }
-        return dummyHead->next;
+        p->next = l1 ? l1 : l2;
+        return dummyHead.next;
     }
 };
+
+
 
 //leetcode submit region end(Prohibit modification and deletion)

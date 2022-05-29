@@ -590,13 +590,139 @@ public:
 */
 ```
 
-https://leetcode.cn/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/
+ 题目限定了时间必须为O(nlgn)，符合要求只有快速排序，归并排序，堆排序，而根据单链表的特点，最适于用归并排序。为啥呢？这是由于链表自身的特点决定的(因为是链表，所以不可以运用到随机访问的特性，所以使用归并排序)。
 
-https://leetcode.cn/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
+可以使用归并排序但是需要递归，这样空间就不是常数级空间复杂度了。常数级空间复杂度可以使用，自底向上的方法。教程见：
 
+- https://leetcode.cn/problems/sort-list/solution/148-pai-xu-lian-biao-bottom-to-up-o1-kong-jian-by-/
+- https://leetcode.cn/problems/sort-list/solution/pai-xu-lian-biao-by-leetcode-solution/
 
+此题中关于解题及程序的收获
+
+- 快慢指针找中点
+- 链表的排序（之前都是数组的）
+- 关于链表的编程规范（初始化，判断，遍历，截断，合并）
+
+递归法：
+
+```c++
+class Solution1 {
+public:
+    ListNode *sortList(ListNode *head) {
+        if (!head || !head->next) {
+            return head;
+        }
+        ListNode *slow = head;
+        ListNode *fast = head;
+        ListNode *pre = head;
+        while (fast && fast->next) {//如此遍历得到的结果，奇数时（例如5），fast停在5，slow停在3，偶数时是奇数+1的情况
+            pre = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        pre->next = NULL;//以slow为分界截断
+
+        return merge(sortList(head), sortList(slow));//
+
+    }
+
+    ListNode *merge(ListNode *l1, ListNode *l2) {
+        ListNode *dummy = new ListNode(-1);//临时头
+        ListNode *cur = dummy;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                cur->next = l1;
+                l1 = l1->next;
+            } else {
+                cur->next = l2;
+                l2 = l2->next;
+            }
+            cur = cur->next;
+        }
+        if (l1) {
+            cur->next = l1;
+        }
+        if (l2) {
+            cur->next = l2;
+        }
+        return dummy->next;
+    }
+};
+```
+
+迭代法（自底向上）
+
+```c++
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        ListNode dummyHead(0);
+        dummyHead.next = head;
+        auto p = head;
+        int length = 0;
+        while (p) {
+            ++length;
+            p = p->next;
+        }
+
+        for (int size = 1; size < length; size <<= 1) {
+            auto cur = dummyHead.next;
+            auto tail = &dummyHead;
+
+            while (cur) {
+                auto left = cur;
+                auto right = cut(left, size); // left->@->@ right->@->@->@...
+                cur = cut(right, size); // left->@->@ right->@->@  cur->@->...
+
+                tail->next = merge(left, right);
+                while (tail->next) {
+                    tail = tail->next;
+                }
+            }
+        }
+        return dummyHead.next;
+    }
+
+    ListNode* cut(ListNode* head, int n) {
+        auto p = head;
+        while (--n && p) {
+            p = p->next;
+        }
+
+        if (!p) return nullptr;
+
+        auto next = p->next;
+        p->next = nullptr;
+        return next;
+    }
+
+    ListNode* merge(ListNode* l1, ListNode* l2) {
+        ListNode dummyHead(0);//链表初始化，ListNode dummyHead(0); 或者ListNode* dummyHead = new ListNode（0）
+        auto p = &dummyHead;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                p->next = l1;
+                p = l1;
+                l1 = l1->next;
+            } else {
+                p->next = l2;
+                p = l2;
+                l2 = l2->next;
+            }
+        }
+        p->next = l1 ? l1 : l2;
+        return dummyHead.next;
+    }
+};
+```
 
 ### [LeetCode 160. 相交链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+
+
+
+
+
 
 ### [LeetCode 206. 反转链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-linked-list/)
 
