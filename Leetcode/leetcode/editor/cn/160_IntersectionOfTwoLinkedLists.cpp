@@ -87,10 +87,59 @@ struct ListNode {
 
 
 //leetcode submit region begin(Prohibit modification and deletion)
-
+/**
+			执行耗时:36 ms,击败了88.57% 的C++用户
+			内存消耗:14.3 MB,击败了43.96% 的C++用户
+*/
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        auto it1=headA;
+        auto it2=headB;
+        auto longOne=headA;
+        auto shortOne=headB;
+        int cnt1=0;
+        int cnt2=0;
+        while(it1){
+            cnt1++;
+            it1=it1->next;
+        }
+        while(it2){
+            cnt2++;
+            it2=it2->next;
+        }
+//        cout<<"cnt1,cnt2 "<<cnt1<<","<<cnt2<<endl;
+
+
+        int startNum=0;
+
+        if (cnt1>cnt2){
+            startNum=cnt1-cnt2;
+        }else{
+            startNum=cnt2-cnt1;
+            longOne=headB;
+            shortOne=headA;
+//            cout<<"startNum "<<startNum<<endl;
+        }
+
+        for (int i = 0; i <= startNum - 1; i++) {
+            longOne=longOne->next;
+//            cout<<"longOne value "<<longOne->val<<endl;
+        }
+//        cout<<"longOne start "<<longOne->val<<endl;
+
+
+        while (longOne&&shortOne){
+            if (longOne==shortOne){
+                return longOne;
+                cout<<"find value "<<longOne->val<<endl;
+            }
+//            cout<<"not find value ,longOne at "<<longOne->val<<endl;
+            longOne=longOne->next;
+            shortOne=shortOne->next;
+        }
+
+        return NULL;
         
     }
 };
