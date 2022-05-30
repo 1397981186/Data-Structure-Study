@@ -140,7 +140,7 @@ public:
         }
 
         return NULL;
-        
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
