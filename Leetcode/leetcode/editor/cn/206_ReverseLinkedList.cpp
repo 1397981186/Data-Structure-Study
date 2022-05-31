@@ -41,12 +41,53 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/**
+ *
+            Solution1(迭代法)
+			执行耗时:4 ms,击败了96.21% 的C++用户
+			内存消耗:8 MB,击败了94.28% 的C++用户
+
+			Solution（递归法）
+			执行耗时:8 ms,击败了49.51% 的C++用户
+			内存消耗:7.9 MB,击败了96.83% 的C++用户
+
+*/
+
 //leetcode submit region begin(Prohibit modification and deletion)
+
+class Solution1 {
+public:
+    ListNode* reverseList(ListNode* head) {
+        auto dummyHead = new ListNode(-1);
+        auto temp = head;
+        auto cur = head;
+        while (cur){
+            temp=cur->next;
+            cur->next=dummyHead->next;
+            dummyHead->next=cur;
+            cur=temp;
+        }
+        return dummyHead->next;
+    }
+};
 
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-
+    ListNode* reverse(ListNode* pre,ListNode* cur){
+        if(cur == NULL) return pre;
+        ListNode* temp = cur->next;
+        cur->next = pre;
+        // 可以和双指针法的代码进行对比，如下递归的写法，其实就是做了这两步
+        // pre = cur;
+        // cur = temp;
+        return reverse(cur,temp);
     }
+    ListNode* reverseList(ListNode* head) {
+        // 和双指针法初始化是一样的逻辑
+        // ListNode* cur = head;
+        // ListNode* pre = NULL;
+        return reverse(NULL, head);
+    }
+
 };
 //leetcode submit region end(Prohibit modification and deletion)

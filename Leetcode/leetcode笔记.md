@@ -743,6 +743,8 @@ public:
 
 ### [LeetCode 206. 反转链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-linked-list/)
 
+基本功
+
 ```
 /**
 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
@@ -772,6 +774,55 @@ public:
 */
 ```
 
+```c++
+/**
+ *
+            Solution1(迭代法)
+			执行耗时:4 ms,击败了96.21% 的C++用户
+			内存消耗:8 MB,击败了94.28% 的C++用户
+
+			Solution（递归法）
+			执行耗时:8 ms,击败了49.51% 的C++用户
+			内存消耗:7.9 MB,击败了96.83% 的C++用户
+
+*/
+
+class Solution1 {
+public:
+    ListNode* reverseList(ListNode* head) {
+        auto dummyHead = new ListNode(-1);
+        auto temp = head;
+        auto cur = head;
+        while (cur){
+            temp=cur->next;
+            cur->next=dummyHead->next;
+            dummyHead->next=cur;
+            cur=temp;
+        }
+        return dummyHead->next;
+    }
+};
+
+class Solution {
+public:
+    ListNode* reverse(ListNode* pre,ListNode* cur){
+        if(cur == NULL) return pre;
+        ListNode* temp = cur->next;
+        cur->next = pre;
+        // 可以和双指针法的代码进行对比，如下递归的写法，其实就是做了这两步
+        // pre = cur;
+        // cur = temp;
+        return reverse(cur,temp);
+    }
+    ListNode* reverseList(ListNode* head) {
+        // 和双指针法初始化是一样的逻辑
+        // ListNode* cur = head;
+        // ListNode* pre = NULL;
+        return reverse(NULL, head);
+    }
+
+};
+```
 
 
 
@@ -779,30 +830,37 @@ public:
 
 
 
-
-## 《线性表》核心教程
+## 线性表
 
 [ACM金牌选手算法讲解《线性表》mp.weixin.qq.com/s/qwaYOFIksFVqZtA_nisl6g](https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/qwaYOFIksFVqZtA_nisl6g)
 
-### **队列&栈**
+LeetCode刷题过程中，常常用到的线性表主要包括以下四个重要的数据结构: 数组、链表、栈、队列。
 
-[LeetCode 20. 有效的括号](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-parentheses/)
+**线性:** 这里的线性是逻辑上的连续，而非物理存储的连续。
 
-[LeetCode 21. 合并两个有序链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/merge-two-sorted-lists/)
+除了线性表以外，还会有非线性表，像堆、图、二叉树等都是非线性表。（逻辑上不连续，没有唯一的尾或者头）
 
-[LeetCode 84. 柱状图中最大的矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+## **队列&栈**
 
-[LeetCode 85. 最大矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximal-rectangle/)
+### [LeetCode 20. 有效的括号](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-parentheses/)
 
-[LeetCode 155. 最小栈](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/min-stack/)
 
-[LeetCode 239. 滑动窗口最大值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sliding-window-maximum/)
 
-[LeetCode 394. 字符串解码](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/decode-string/)
+### [LeetCode 21. 合并两个有序链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/merge-two-sorted-lists/)
 
-[LeetCode 739. 每日温度](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/daily-temperatures/)
+### [LeetCode 84. 柱状图中最大的矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
-[LeetCode 3. 无重复字符的最长子串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+### [LeetCode 85. 最大矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximal-rectangle/)
+
+### [LeetCode 155. 最小栈](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/min-stack/)
+
+### [LeetCode 239. 滑动窗口最大值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sliding-window-maximum/)
+
+### [LeetCode 394. 字符串解码](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/decode-string/)
+
+### [LeetCode 739. 每日温度](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/daily-temperatures/)
+
+### [LeetCode 3. 无重复字符的最长子串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 
 ## 《单调栈和滑动窗口》核心教程
 
