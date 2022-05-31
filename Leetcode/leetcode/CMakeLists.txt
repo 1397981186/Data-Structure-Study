@@ -12,3 +12,4 @@ add_executable(19_RemoveNthNodeFromEndOfList ./editor/cn/19_RemoveNthNodeFromEnd
 add_executable(148_SortList ./editor/cn/148_SortList.cpp)
 add_executable(160_IntersectionOfTwoLinkedLists ./editor/cn/160_IntersectionOfTwoLinkedLists.cpp)
 add_executable(206_ReverseLinkedList ./editor/cn/206_ReverseLinkedList.cpp)
+add_executable(20_ValidParentheses ./editor/cn/20_ValidParentheses.cpp)
