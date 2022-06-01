@@ -924,7 +924,38 @@ public:
 
 ### [LeetCode 21. 合并两个有序链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/merge-two-sorted-lists/)
 
+思路很简单。
+
+注意合并的是链表不是数组，有迭代和递归两种方法就行。
+
+```c++
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* a, ListNode* b) {
+        ListNode head, *tail = &head;
+        while (a && b) {
+            if (a->val <= b->val) {
+                tail->next = a;
+                a = a->next;
+            } else {
+                tail->next = b;
+                b = b->next;
+            }
+            tail = tail->next;
+        }
+        tail->next = a ? a : b;//后面的不用排了，直接连接
+        return head.next;
+    }
+};
+```
+
+
+
 ### [LeetCode 84. 柱状图中最大的矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+
+
+
+
 
 ### [LeetCode 85. 最大矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximal-rectangle/)
 
