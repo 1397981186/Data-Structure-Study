@@ -885,11 +885,40 @@ LeetCode刷题过程中，常常用到的线性表主要包括以下四个重要
  Related Topics 栈 字符串 👍 3283 👎 0
 ```
 
-通过本题，学习栈的用法。
+通过本题，**学习栈的用法。**（获取栈顶元素，增加，删除，等）
 
 由于栈结构的特殊性，非常适合做对称匹配类的题目。
 
+string底层保存的还是char
 
+
+
+```c++
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> stack1;
+
+        for (int i = 0; i <= s.size() - 1; i++) {
+            if (s[i]=='('){//此处用单引号是因为string底层保存的还是char
+                stack1.push(')');
+            }else if (s[i]=='{'){
+                stack1.push('}');
+            }else if (s[i]=='['){
+                stack1.push(']');
+            } else if (stack1.empty()){
+                return false;
+            }else if (s[i]==stack1.top()){
+                stack1.pop();
+            } else if (s[i]!=stack1.top()){
+                return false;
+            }
+        }
+
+        return stack1.empty();
+    }
+};
+```
 
 
 
