@@ -124,6 +124,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/42_TrappingRainWater.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/42_TrappingRainWater.md" />
+              <option name="frontendQuestionId" value="leetcode.cn42" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/42_TrappingRainWater.cpp" />
+              <option name="titleSlug" value="trapping-rain-water" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/4MedianOfTwoSortedArrays.cpp">
           <value>
             <LeetcodeEditor>
@@ -165,6 +176,17 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/76_MinimumWindowSubstring.cpp" />
               <option name="titleSlug" value="minimum-window-substring" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/84_LargestRectangleInHistogram.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/84_LargestRectangleInHistogram.md" />
+              <option name="frontendQuestionId" value="leetcode.cn84" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/84_LargestRectangleInHistogram.cpp" />
+              <option name="titleSlug" value="largest-rectangle-in-histogram" />
             </LeetcodeEditor>
           </value>
         </entry>

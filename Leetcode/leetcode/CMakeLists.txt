@@ -14,3 +14,5 @@ add_executable(160_IntersectionOfTwoLinkedLists ./editor/cn/160_IntersectionOfTw
 add_executable(206_ReverseLinkedList ./editor/cn/206_ReverseLinkedList.cpp)
 add_executable(20_ValidParentheses ./editor/cn/20_ValidParentheses.cpp)
 add_executable(21_MergeTwoSortedLists ./editor/cn/21_MergeTwoSortedLists.cpp)
+add_executable(84_LargestRectangleInHistogram ./editor/cn/84_LargestRectangleInHistogram.cpp)
+add_executable(42_TrappingRainWater ./editor/cn/42_TrappingRainWater.cpp)
