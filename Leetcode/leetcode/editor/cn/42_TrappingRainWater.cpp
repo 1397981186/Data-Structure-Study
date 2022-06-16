@@ -34,30 +34,62 @@
 #include <stack>
 
 using namespace std;
-
+/**
+			执行耗时:20 ms,击败了11.55% 的C++用户
+			内存消耗:19.7 MB,击败了13.87% 的C++用户
+*/
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
     int trap(vector<int>& height) {
-        vector<int> pool;
-        int pre=0;
-        int firstIt=0;
-        int lastIt=0;
+        stack<int> st;
+        int midHeight=0;
         int res=0;
-        int i=0;
-        while (true){
-            if (height[i]>=pre&&firstIt==0){//
-                pre=height[i];
-            }else if (height[i]<pre&&firstIt==0){
+        int wall=0;
+//        int mid=0;
+        if (height.size()<=2){
+            return 0;
+        }
 
-            }
+        for (int i = 0; i <= height.size()-1; i++) {
+            if (st.empty()){
+                st.push(i);
+            }else{
+                if (height[i]<height[st.top()]){
+                    st.push(i);
+                } else if (height[i]==height[st.top()]){
+                    st.pop();
+                    st.push(i);
+                }else{
+                    while (!st.empty()&&height[st.top()]<=height[i]){
+//                    mid=height[st.top()];
+                        midHeight=height[st.top()];
+                        st.pop();
+                        if (st.empty()){
+                            break;//当stack里只有一个的情况
+                        }
+                        wall=min(height[st.top()],height[i]);
+                        res+=(i-st.top()-1)*(wall-midHeight);
+                    }
 
+                    st.push(i);
+                }
 
-
-            if (i==height.size()-1){
-                break;
             }
         }
+        return res;
     }
 };
+
 //leetcode submit region end(Prohibit modification and deletion)
+int main()
+{
+    Solution solution;
+    vector<int> nums1={0,1,0,2,1,0,1,3,2,1,2,1};
+//    vector<int> nums1={4,2,0,3,2,5};
+//    vector<int> nums2={3};
+    double res;
+    res=solution.trap(nums1);
+    cout<<"---sre---"<<res<<endl;
+    return 0;
+}
