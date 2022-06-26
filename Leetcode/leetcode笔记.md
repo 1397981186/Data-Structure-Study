@@ -993,6 +993,16 @@ public:
 
 
 
+动态规划法
+
+对于每一个 i，我们计算出其左边第一个高度小于它的索引 p，同样地，计算出右边第一个高度小于它的索引 q。那么以 i 为最低点能够构成的面积就是`(q - p - 1) * heights[i]`。 这种算法毫无疑问也是正确的。 我们证明一下，假设 f(i) 表示求以 i 为最低点的情况下，所能形成的最大矩阵面积。那么原问题转化为`max(f(0), f(1), f(2), ..., f(n - 1))`。
+
+
+
+单调栈
+
+看到这种需要打一个弧线的要先想到单调栈。核心思想还是计算以 i 为最低点的情况下，所能形成的最大矩阵面积。栈始终保持从小到大排列。
+
 
 
 
@@ -1141,6 +1151,8 @@ public:
 
 stl栈：st.pop()	st.push()	st.top()	st.empty() 这几个关键函数的掌握。
 
+单调栈解法：
+
 ```c++
 /**
          执行耗时:20 ms,击败了11.55% 的C++用户
@@ -1189,6 +1201,52 @@ public:
     }
 };
 ```
+
+动态规划解法：
+
+​	找数组中每个i的左右最大值，从左到右累加得到最后的res。
+
+​	找最大值时，左边的最高高度是前一个位置的左边最高高度和本高度的最大值。
+
+​	即从左向右遍历：maxLeft[i] = max(height[i], maxLeft[i - 1]);
+
+​	从右向左遍历：maxRight[i] = max(height[i], maxRight[i + 1]);
+
+```c++
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        if (height.size() <= 2) return 0;
+        vector<int> maxLeft(height.size(), 0);
+        vector<int> maxRight(height.size(), 0);
+        int size = maxRight.size();
+
+        // 记录每个柱子左边柱子最大高度
+        maxLeft[0] = height[0];
+        for (int i = 1; i < size; i++) {
+            maxLeft[i] = max(height[i], maxLeft[i - 1]);
+        }
+        // 记录每个柱子右边柱子最大高度
+        maxRight[size - 1] = height[size - 1];
+        for (int i = size - 2; i >= 0; i--) {
+            maxRight[i] = max(height[i], maxRight[i + 1]);
+        }
+        // 求和
+        int sum = 0;
+        for (int i = 0; i < size; i++) {
+            int count = min(maxLeft[i], maxRight[i]) - height[i];
+            if (count > 0) sum += count;
+        }
+        return sum;
+    }
+};
+```
+
+
+
+
+
+
 
 
 
