@@ -32,10 +32,40 @@
 using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
+//先动态规划，再单调栈
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
+        //动态规划写法
+        vector<int> leftSmallIt;
+        vector<int> rightSmallIt;
+        int smallTemp=0;
+
+        leftSmallIt[0]=-1;
+        for (int i = 1; i <= heights.size() - 1; i++) {
+            if (heights[i]>heights[i-1]){
+                leftSmallIt[i]=i-1;
+            } else if(heights[i]=heights[i-1]){
+                leftSmallIt[i]=leftSmallIt[i-1];
+            } else{
+                smallTemp=leftSmallIt[i-1];
+                while (heights[i]>=heights[smallTemp]){
+                    smallTemp=leftSmallIt[smallTemp];
+                }
+                leftSmallIt[i]=smallTemp;
+            }
+        }
 
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
+int main()
+{
+    Solution solution;
+    vector<int> nums1={1,2};
+//    vector<int> nums2={3};
+    double res;
+    res=solution.largestRectangleArea(nums1);
+    cout<<"---sre---"<<res<<endl;
+    return 0;
+}
