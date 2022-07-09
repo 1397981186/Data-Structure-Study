@@ -40,21 +40,27 @@ public:
         vector<int> leftSmallIt;
         vector<int> rightSmallIt;
         int smallTemp=0;
-
-        leftSmallIt[0]=-1;
+        int res=0;
+        leftSmallIt.push_back(-1);
         for (int i = 1; i <= heights.size() - 1; i++) {
             if (heights[i]>heights[i-1]){
-                leftSmallIt[i]=i-1;
-            } else if(heights[i]=heights[i-1]){
-                leftSmallIt[i]=leftSmallIt[i-1];
+                leftSmallIt.push_back(i-1);
+            } else if(heights[i]==heights[i-1]){
+                leftSmallIt.push_back(leftSmallIt[i-1]);
             } else{
-                smallTemp=leftSmallIt[i-1];
-                while (heights[i]>=heights[smallTemp]){
+                //why so wawawawawawwawawwwwwwwwwawaawawawawawawawawawawawawawawaw
+                smallTemp=i-1;
+                while (heights[i]<=heights[smallTemp]&&smallTemp>0){
                     smallTemp=leftSmallIt[smallTemp];
                 }
-                leftSmallIt[i]=smallTemp;
+                leftSmallIt.push_back(smallTemp);
             }
         }
+        for (int i = 0; i <= leftSmallIt.size() - 1; i++) {
+            cout<<leftSmallIt[i]<<" ";
+        }
+
+        return res;
 
     }
 };
@@ -62,9 +68,9 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums1={1,2};
+    vector<int> nums1={1,2,3,3,4,5,4,3,2,1};
 //    vector<int> nums2={3};
-    double res;
+    int res;
     res=solution.largestRectangleArea(nums1);
     cout<<"---sre---"<<res<<endl;
     return 0;
