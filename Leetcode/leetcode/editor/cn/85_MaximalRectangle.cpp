@@ -42,7 +42,7 @@
 
 using namespace std;
 //注意行列的获取方式
-//
+//注意二维vector声明并初始化仍然可以像二维数组［］［］一样
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
@@ -61,12 +61,14 @@ public:
         res=getMaxSquare(heights);
         for (int i = 1; i <= rows - 1; i++) {
             for (int j = 0; j <= cols - 1; j++) {
-                if (matrix[i][j]==1){
+                if (matrix[i][j]=='1'){
                     heights[j]+=1;
                 } else{
-                    heights[j]=0;
+                    heights[j]='0';
                 }
+                cout<<heights[j]<<' ';
             }
+            cout<<endl;
             tempRes= getMaxSquare(heights);
             if (tempRes>res){
                 res=tempRes;
@@ -79,3 +81,19 @@ public:
 
 };
 //leetcode submit region end(Prohibit modification and deletion)
+
+int main()
+{
+    Solution solution;
+
+//注意二维vector依然可以如此声明，就像二维数组［］［］一样
+    vector<vector<char>> nums1({{'1','0','1','0','0'}
+                                ,{'1','0','1','0','1'}
+                                ,{'1','0','0','1','0'}
+                                ,{'1','1','1','1','1'}});
+    double res;
+    res=solution.maximalRectangle(nums1);
+    cout<<"---sre---"<<res<<endl;
+    return 0;
+}
+
