@@ -43,6 +43,7 @@
 using namespace std;
 //注意行列的获取方式
 //注意二维vector声明并初始化仍然可以像二维数组［］［］一样
+//注意char到int的转换
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

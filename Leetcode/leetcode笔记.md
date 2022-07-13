@@ -1127,6 +1127,86 @@ public:
 
 ### [LeetCode 85. 最大矩形](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximal-rectangle/)
 
+可以利用84的代码算每一次的面积
+
+```c++
+//注意行列的获取方式
+//注意二维vector声明并初始化仍然可以像二维数组［］［］一样
+//注意char到int的转换
+```
+
+```c++
+class Solution {
+    /**
+			执行耗时:36 ms,击败了84.66% 的C++用户
+			内存消耗:15 MB,击败了34.85% 的C++用户
+    */
+public:
+//    int getMaxSquare(vector<char> &height){
+    int getMaxSquare(vector<int> height){
+        int res=0;
+        int temp=0;
+        int midIt=0;
+
+
+        height.insert(height.begin(),0);
+        height.push_back(0);
+        stack<int> st;
+        st.push(0);
+
+        for (int i = 1; i <= height.size() - 1; i++) {
+            if (height[i]>height[st.top()]){
+                st.push(i);
+            }else if (height[i]==height[st.top()]){
+                st.pop();
+                st.push(i);
+            } else{
+                while (st.size()>1&&height[i]<height[st.top()]){
+                    midIt=st.top();
+                    st.pop();
+                    temp=(height[midIt])*(i-st.top()-1);
+                    if (temp>res){
+                        res=temp;
+                    }
+                }
+                st.push(i);
+            }
+        }
+
+        return res;
+    }
+
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int rows=matrix.size();//行
+        int cols=matrix[0].size();//列
+        vector<int> heights(matrix[0].size(),0);
+        int res=0;
+        int tempRes=0;
+        res=getMaxSquare(heights);
+//        cout<<res<<endl;
+        for (int i = 0; i <= rows - 1; i++) {
+            for (int j = 0; j <= cols - 1; j++) {
+                if (matrix[i][j]=='1'){
+                    heights[j]+=1;
+                } else{
+                    heights[j]=0;
+                }
+//                cout<<heights[j]<<' ';
+            }
+//            cout<<endl;
+            tempRes= getMaxSquare(heights);
+            if (tempRes>res){
+                res=tempRes;
+            }
+        }
+
+        return res;
+    }
+
+
+};
+```
+
 
 
 ### [LeetCode 155. 最小栈](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/min-stack/)
