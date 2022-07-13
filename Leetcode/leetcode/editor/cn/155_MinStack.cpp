@@ -9,13 +9,8 @@
  void pop() 删除堆栈顶部的元素。 
  int top() 获取堆栈顶部的元素。 
  int getMin() 获取堆栈中的最小元素。 
- 
 
- 
-
- 示例 1: 
-
- 
+ 示例 1:
 输入：
 ["MinStack","push","push","push","getMin","pop","top","getMin"]
 [[],[-2],[0],[-3],[],[],[],[]]
@@ -36,9 +31,7 @@ minStack.getMin();   --> 返回 -2.
 
  
 
- 提示： 
-
- 
+ 提示：
  -2³¹ <= val <= 2³¹ - 1 
  pop、top 和 getMin 操作总是在 非空栈 上调用 
  push, pop, top, and getMin最多被调用 3 * 10⁴ 次 
@@ -59,6 +52,9 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class MinStack {
 public:
+    vector<int> min;
+    vector<int> allData;
+
     MinStack() {
 
     }
