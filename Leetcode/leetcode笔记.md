@@ -1241,6 +1241,54 @@ minStack.top();      --> 返回 0.
 minStack.getMin();   --> 返回 -2.
 ```
 
+单调栈的简单应用
+
+```c++
+/**
+			执行耗时:20 ms,击败了71.44% 的C++用户
+			内存消耗:15.8 MB,击败了93.94% 的C++用户
+*/
+//leetcode submit region begin(Prohibit modification and deletion)
+class MinStack {
+public:
+    stack<int> min;
+    stack<int> allData;
+
+    MinStack() {
+
+    }
+    
+    void push(int val) {
+        if (allData.size()==0){
+            min.push(val);
+        }else{
+            if (val<=min.top()){//若遇到相同的最小值，则都入栈；防止pop完一个后，min栈没有该最小值的情况
+                min.push(val);
+            }
+        }
+        allData.push(val);
+    }
+    
+    void pop() {
+        if (allData.top()==min.top()){
+            allData.pop();
+            min.pop();
+        }else{
+            allData.pop();
+        }
+    }
+    
+    int top() {
+        return allData.top();
+    }
+    
+    int getMin() {
+        return min.top();
+    }
+};
+
+```
+
 
 
 ### [LeetCode 239. 滑动窗口最大值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sliding-window-maximum/)
