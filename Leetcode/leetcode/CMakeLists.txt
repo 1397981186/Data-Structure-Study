@@ -18,3 +18,4 @@ add_executable(84_LargestRectangleInHistogram ./editor/cn/84_LargestRectangleInH
 add_executable(42_TrappingRainWater ./editor/cn/42_TrappingRainWater.cpp)
 add_executable(85_MaximalRectangle ./editor/cn/85_MaximalRectangle.cpp)
 add_executable(155_MinStack ./editor/cn/155_MinStack.cpp)
+add_executable(239_SlidingWindowMaximum ./editor/cn/239_SlidingWindowMaximum.cpp)
