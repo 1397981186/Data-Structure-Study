@@ -54,6 +54,47 @@ class Solution {
 public:
     string decodeString(string s) {
         stack<char> theStack;
+        string tempS="";
+        string tempN="";
+        string res="";
+
+        for (int i = 0; i <= s.size() - 1; i++) {
+            if (s[i]!=']'){
+                theStack.push(s[i]);
+            } else{
+                while (!theStack.empty()&&theStack.top()!='['){//get all words
+                    tempS+=theStack.top();
+                    theStack.pop();
+                }
+                theStack.pop();//pop '['
+                while (!theStack.empty()&&theStack.top()>='0'&&theStack.top()<='9'){//get all nums
+                    tempN+=theStack.top();
+                    theStack.pop();
+                }
+                int tempNum= atoi(tempN.c_str());
+                string tempSAll="";
+                for (int j = 0; j <= tempNum-1; j++) {
+                    tempSAll+=tempS;
+                }
+                cout<<tempSAll<<endl;
+                tempS="";
+                tempN="";
+                for (int k = 0; k <= tempSAll.size() - 1; k++) {
+                    theStack.push(tempSAll[k]);
+                }
+
+
+            }
+        }
+
+        for (int l = 0; l <= theStack.size()-1; l++) {
+            res+=theStack.top();
+            theStack.pop();
+        }
+
+        return res;
+
+
 
 
     }
