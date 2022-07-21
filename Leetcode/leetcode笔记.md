@@ -1416,7 +1416,101 @@ public:
 
 
 
+涛的思路，看见对称性的，尤其是这种括号，就要想到栈
 
+利用规则，最小单元中，括号里的是数字，“[”左边是字母进行两段迭代
+
+```c++
+class Solution {
+    /**
+    		执行耗时:4 ms,击败了9.44% 的C++用户
+			内存消耗:6.5 MB,击败了28.63% 的C++用户
+    */
+public:
+    string decodeString(string s) {
+        stack<char> theStack;
+        int sSize=s.size();
+        string tempS="";
+        string tempN="";
+        string res="";
+
+        for (int i = 0; i <= sSize - 1; i++) {
+            if (s[i]!=']'){
+                theStack.push(s[i]);
+            } else{
+                while (!theStack.empty()&&theStack.top()!='['){//get all words
+//                    tempS+=theStack.top();
+                    tempS.insert(tempS.begin(),theStack.top());
+                    theStack.pop();
+                }
+                theStack.pop();//pop '['
+                while (!theStack.empty()&&theStack.top()>='0'&&theStack.top()<='9'){//get all nums
+//                    tempN+=theStack.top();
+                    tempN.insert(tempN.begin(),theStack.top());
+                    theStack.pop();
+                }
+                int tempNum= atoi(tempN.c_str());
+                string tempSAll="";
+                for (int j = 0; j <= tempNum-1; j++) {
+                    tempSAll+=tempS;
+                }
+                tempS="";
+                tempN="";
+                for (int k = 0; k <= tempSAll.length() - 1; k++) {
+                    theStack.push(tempSAll[k]);
+                }
+
+
+            }
+        }
+
+//        for (int l = 0; l <= theStack.size()-1; l++) {
+//            res+=theStack.top();
+//            cout<<theStack.top()<<endl;
+//            theStack.pop();
+//        }
+//不可以这样打印，theStack size会在每次迭代时改变
+        while (!theStack.empty()){
+//            res+=theStack.top();
+            res.insert(res.begin(),theStack.top());
+            theStack.pop();
+        }
+        return res;
+    }
+};
+```
+
+其实可以更快，把取数字的过程简单化；用string栈而不是char栈减少入栈次数
+
+```c++
+//执行用时：0 ms, 在所有 C++ 提交中击败了100.00%的用户
+//内存消耗：6.4 MB, 在所有 C++ 提交中击败了52.08%的用户
+class Solution {
+public:
+    string decodeString(string s) {
+        string t = "";
+        stack<int> s_num;
+        stack<string> s_str;
+        int cnt = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] >= '0' && s[i] <= '9') {
+                cnt = 10 * cnt + s[i] - '0';
+            } else if (s[i] == '[') {
+                s_num.push(cnt);
+                s_str.push(t);
+                cnt = 0; t.clear();
+            } else if (s[i] == ']') {
+                int k = s_num.top(); s_num.pop();
+                for (int j = 0; j < k; ++j) s_str.top() += t;
+                t = s_str.top(); s_str.pop();
+            } else {
+                t += s[i];
+            }
+        }
+        return s_str.empty() ? t : s_str.top();
+    }
+};
+```
 
 
 

@@ -51,24 +51,31 @@ using namespace std;
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    /**
+    		执行耗时:4 ms,击败了9.44% 的C++用户
+			内存消耗:6.5 MB,击败了28.63% 的C++用户
+    */
 public:
     string decodeString(string s) {
         stack<char> theStack;
+        int sSize=s.size();
         string tempS="";
         string tempN="";
         string res="";
 
-        for (int i = 0; i <= s.size() - 1; i++) {
+        for (int i = 0; i <= sSize - 1; i++) {
             if (s[i]!=']'){
                 theStack.push(s[i]);
             } else{
                 while (!theStack.empty()&&theStack.top()!='['){//get all words
-                    tempS+=theStack.top();
+//                    tempS+=theStack.top();
+                    tempS.insert(tempS.begin(),theStack.top());
                     theStack.pop();
                 }
                 theStack.pop();//pop '['
                 while (!theStack.empty()&&theStack.top()>='0'&&theStack.top()<='9'){//get all nums
-                    tempN+=theStack.top();
+//                    tempN+=theStack.top();
+                    tempN.insert(tempN.begin(),theStack.top());
                     theStack.pop();
                 }
                 int tempNum= atoi(tempN.c_str());
@@ -76,35 +83,34 @@ public:
                 for (int j = 0; j <= tempNum-1; j++) {
                     tempSAll+=tempS;
                 }
-                cout<<tempSAll<<endl;
                 tempS="";
                 tempN="";
-                for (int k = 0; k <= tempSAll.size() - 1; k++) {
+                for (int k = 0; k <= tempSAll.length() - 1; k++) {
                     theStack.push(tempSAll[k]);
                 }
-
-
             }
         }
 
-        for (int l = 0; l <= theStack.size()-1; l++) {
-            res+=theStack.top();
+//        for (int l = 0; l <= theStack.size()-1; l++) {
+//            res+=theStack.top();
+//            cout<<theStack.top()<<endl;
+//            theStack.pop();
+//        }
+//不可以这样打印，theStack size会在每次迭代时改变
+        while (!theStack.empty()){
+//            res+=theStack.top();
+            res.insert(res.begin(),theStack.top());
             theStack.pop();
         }
-
         return res;
-
-
-
-
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 int main()
 {
     Solution solution;
-    string s = "3[a]2[bc]";
-//    string s = s = "3[a2[c]]"";
+//    string s = "3[a]2[bc]";
+    string s = "100[leetcode]";
 //    vector<int> nums2={3};
     string res;
     res=solution.decodeString(s);
