@@ -33,11 +33,39 @@
 #include <stack>
 
 using namespace std;
-
+//思路
+//维持单调递减的单调栈，每当遇到不递减的情况就更新answer
+//这种下标间隔的，一般栈里都放坐标
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int size = temperatures.size();
+        stack<int> myStack;
+        vector<int> answer(size);
+        myStack.push(0);
+        for (int i = 1; i <= size - 1; i++) {
+//            cout<<"here"<<endl;
+            if (temperatures[i]<=temperatures[myStack.top()]){
+                myStack.push(i);
+//                answer[i-1]=1;
+            }else{
+                while (!myStack.empty()&&temperatures[i]>temperatures[myStack.top()]){
+                    answer[myStack.top()]=i-myStack.top();
+                    myStack.pop();
+                }
+                myStack.push(i);
+            }
+        }
+        int remain = myStack.size();
+        for (int j = remain-1; j >=0 ; j-- ){
+            answer[myStack.top()]=0;
+            myStack.pop();
+        }
+
+        return answer;
+
+
 
     }
 };
@@ -46,13 +74,13 @@ public:
 int main()
 {
     Solution solution;
-    vector<int> nums1={73,74,75,71,69,72,76,73};
+    vector<int> nums1={55,38,53,81,61,93,97,32,43,78};
 //    vector<int> nums2={3};
     vector<int> res;
     res=solution.dailyTemperatures(nums1);
     cout<<"---sre---"<<endl;
-    for (int i = 0; i <= res.size(); i++) {
-        cout<<res[i];
+    for (int i = 0; i <= res.size()-1; i++) {
+        cout<<res[i]<<" ";
     }
     cout<<endl;
     return 0;
