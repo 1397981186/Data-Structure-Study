@@ -1528,7 +1528,49 @@ public:
 输出: [1,1,1,0]
 ```
 
+思路
 
+- 维持单调递减的单调栈，每当遇到不递减的情况就更新answer
+- 通常是一维数组，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置，此时我们就要想到可以用单调栈了。
+- 这种下标间隔的，一般栈里都放坐标
+
+
+
+```c++
+class Solution {
+    /**
+          执行耗时:136 ms,击败了66.73% 的C++用户
+         内存消耗:86.8 MB,击败了50.24% 的C++用户
+    */
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+        int size = temperatures.size();
+        stack<int> myStack;
+        vector<int> answer(size);
+        myStack.push(0);
+        for (int i = 1; i <= size - 1; i++) {
+//            cout<<"here"<<endl;
+            if (temperatures[i]<=temperatures[myStack.top()]){
+                myStack.push(i);
+//                answer[i-1]=1;
+            }else{
+                while (!myStack.empty()&&temperatures[i]>temperatures[myStack.top()]){
+                    answer[myStack.top()]=i-myStack.top();
+                    myStack.pop();
+                }
+                myStack.push(i);
+            }
+        }
+        int remain = myStack.size();
+        for (int j = remain-1; j >=0 ; j-- ){//定义result数组的时候，就应该直接初始化为0，如果result没有更新，说明这个元素右面没有更大的了，也就是为0。
+            answer[myStack.top()]=0;
+            myStack.pop();
+        }
+        return answer;
+
+    }
+};
+```
 
 
 
