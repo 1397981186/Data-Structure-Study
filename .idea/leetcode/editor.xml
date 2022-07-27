@@ -157,6 +157,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/3_LongestSubstringWithoutRepeatingCharacters.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/3_LongestSubstringWithoutRepeatingCharacters.md" />
+              <option name="frontendQuestionId" value="leetcode.cn3" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/3_LongestSubstringWithoutRepeatingCharacters.cpp" />
+              <option name="titleSlug" value="longest-substring-without-repeating-characters" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/42_TrappingRainWater.cpp">
           <value>
             <LeetcodeEditor>
@@ -281,10 +292,10 @@
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[3]无重复字符的最长子串.cpp">
           <value>
             <LeetcodeEditor>
-              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/[3]无重复字符的最长子串.md" />
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/3_LongestSubstringWithoutRepeatingCharacters.md" />
               <option name="frontendQuestionId" value="leetcode.cn3" />
               <option name="host" value="leetcode.cn" />
-              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/[3]无重复字符的最长子串.cpp" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/3_LongestSubstringWithoutRepeatingCharacters.cpp" />
               <option name="titleSlug" value="longest-substring-without-repeating-characters" />
             </LeetcodeEditor>
           </value>
