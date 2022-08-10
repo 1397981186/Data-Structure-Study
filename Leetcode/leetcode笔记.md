@@ -1590,17 +1590,48 @@ public:
 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
 ```
 
+思考
+
+//暴力法时间复杂度太高,考虑使用滑动窗口(双端队列)但是滑动窗口不好检测重复，故使用map
+
+//通过此题，学习map容器相关方法
+
+// mp[alpha] = i;记录下标，再start = max(start,myMap[alpha]+1); 避开了双端队列的使用，这是需要一定灵感的。有时候不一定想的到
+
+```c++
+//leetcode submit region begin(Prohibit modification and deletion)
+class Solution {
+    /**
+    		执行耗时:8 ms,击败了88.05% 的C++用户
+			内存消耗:8.2 MB,击败了58.29% 的C++用户
+    */
+public:
+    int lengthOfLongestSubstring(string s) {
+        map<char,int> myMap;
+        int res = 0;
+        int sLen = s.size();
+//        cout<< sLen <<endl;
+        int start = 0;
+        if (sLen<=1){
+            return sLen;
+        }
+        for (int i = 0; i <= sLen - 1; i++) {
+            char alpha = s[i];
+            if (myMap.count(alpha)){//myMap.find((s[i]))!=myMap.end() 也可
+                res = max(res,i-start);
+                start = max(start,myMap[alpha]+1);//精髓，对于"abca" "abcc" "abba"三种情况都适用
+            }
+            myMap[alpha] = i;
+        }
+        res = max(res,sLen-start);
+        return  res;
+    }
+};
+```
 
 
 
-
-
-
-
-
-## 《单调栈和滑动窗口》核心教程
-
-[ACM金牌选手讲解LeetCode算法《栈和队列的高级应用》mp.weixin.qq.com/s/I3DQOUmABmWav4nrAiI3Fg![img](leetcode笔记.assets/v2-3d51b416d87c63e6f96f306dde0bc049_180x120-16513887269635.jpg)](https://link.zhihu.com/?target=https%3A//mp.weixin.qq.com/s/I3DQOUmABmWav4nrAiI3Fg)
+## 哈希表、二叉树
 
 ### **哈希表**
 

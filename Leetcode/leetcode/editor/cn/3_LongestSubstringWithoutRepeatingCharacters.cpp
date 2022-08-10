@@ -37,23 +37,33 @@ using namespace std;
 //思考
 //暴力法时间复杂度太高,考虑使用滑动窗口(双端队列)但是滑动窗口不好检测重复，故使用map
 //通过此题，学习map容器相关方法
+// mp[alpha] = i;通过记录下标，避开了双端队列的使用。
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    /**
+    		执行耗时:8 ms,击败了88.05% 的C++用户
+			内存消耗:8.2 MB,击败了58.29% 的C++用户
+    */
 public:
     int lengthOfLongestSubstring(string s) {
         map<char,int> myMap;
-        int res;
+        int res = 0;
         int sLen = s.size();
-        if (sLen==0){
-            return 0;
+//        cout<< sLen <<endl;
+        int start = 0;
+        if (sLen<=1){
+            return sLen;
         }
         for (int i = 0; i <= sLen - 1; i++) {
-            if (myMap.find(s[i])){
-
+            char alpha = s[i];
+            if (myMap.count(alpha)){//myMap.find((s[i]))!=myMap.end() 也可
+                res = max(res,i-start);
+                start = max(start,myMap[alpha]+1);//精髓，对于"abca" "abcc" "abba"三种情况都适用
             }
+            myMap[alpha] = i;
         }
-
-
+        res = max(res,sLen-start);
+        return  res;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -62,7 +72,8 @@ int main()
     Solution solution;
 //    vector<int> nums1={1,2};
 //    vector<int> nums2={3};
-    string s= "abcabcbb";
+//    string s= "abcabcbb";
+    string s= "abba";
     int res;
     res=solution.lengthOfLongestSubstring(s);
     cout<<"---sre---"<<res<<endl;

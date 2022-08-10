@@ -22,3 +22,4 @@ add_executable(239_SlidingWindowMaximum ./editor/cn/239_SlidingWindowMaximum.cpp
 add_executable(394_DecodeString ./editor/cn/394_DecodeString.cpp)
 add_executable(739_DailyTemperatures ./editor/cn/739_DailyTemperatures.cpp)
 add_executable(3_LongestSubstringWithoutRepeatingCharacters ./editor/cn/3_LongestSubstringWithoutRepeatingCharacters.cpp)
+add_executable(49_GroupAnagrams ./editor/cn/49_GroupAnagrams.cpp)
