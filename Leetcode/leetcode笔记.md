@@ -1635,37 +1635,144 @@ public:
 
 ### **哈希表**
 
-[LeetCode 49. 字母异位词分组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/group-anagrams/)
+#### [LeetCode 49. 字母异位词分组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/group-anagrams/)
 
-[128. 最长连续序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-consecutive-sequence/)
+```
+给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
 
-[LeetCode 141. 环形链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/linked-list-cycle/)
+示例:
 
-[LeetCode 146. LRU 缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)
+输入: ["eat", "tea", "tan", "ate", "nat", "bat"]
+输出:
+[
+  ["ate","eat","tea"],
+  ["nat","tan"],
+  ["bat"]
+]
+说明：
 
-[LeetCode 560. 和为K的子数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/subarray-sum-equals-k/)
+所有输入均为小写字母。
+不考虑答案输出的顺序。
+```
+
+```c++
+//思考
+//提示 哈希表、二叉树 ？ 这怎么用
+//目前的想法：
+//  暴力法：声明strs.length长度数组，对于strs中的每个单词在进行归类到这些数组中，再合并。归类时判断是否由相同字母构成也要遍历？ 如此复杂度很高
+//        归类时是否有映射算法，使得相同字母构成的单词得到同样的值？--->sort
+//        不用声明strs.length长度数组，vector可以灵活添加
+```
+
+总结：
+
+- 一般需要归类的就要想到哈希表
+- 学习map、二维数组创建，增加某一行的方法
+- string操作的进一步完善，两份代码有很多易错细节。（见备注）
+
+两种方案，排序法和字母映射法
+
+排序法代码如下
+
+```c++
+    vector<vector<string>> groupAnagrams1(vector<string>& strs) {
+        /**
+			执行耗时:36 ms,击败了35.32% 的C++用户
+			内存消耗:17.7 MB,击败了95.99% 的C++用户
+        */
+        vector<vector<string>> res ;
+        string  word;
+        int strsLen = strs.size();
+        map<string, int> myMap;
+        for (int i = 0; i <= strsLen-1; i++) {
+            word = strs[i];
+            sort(word.begin(),word.end());
+            if (!myMap.count(word)){
+                res.push_back({});//二维数组添加新的一行的方法
+                myMap[word] = res.size()-1;//巧妙的映射单词到同一组，有点哈希的味道，但不是很多
+            }
+            res[myMap[word]].push_back(strs[i]);
+        }
+        return  res;
+    }
+
+```
+
+字母映射法代码如下
+
+```c++
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        /**
+			执行耗时:88 ms,击败了5.62% 的C++用户
+			内存消耗:26.1 MB,击败了4.99% 的C++用户
+        */
+        vector<vector<string>> res ;
+        map<string,vector<string>> myMap;
+
+        for (int i = 0; i <= strs.size() - 1; i++) {
+            string word = strs[i];
+            vector<int> letter(26);//声明固定大小数组的方法
+            for (char  c : word) {
+                letter[c-'a']+=1;
+            }
+            string hashWord;
+            for (int j = 0; j <= 25; j++) {
+                if (letter[j]!=0){
+                    for (int k = 0; k <= letter[j]-1; k++) {
+//                        hashWord += string(1,j+'a')+to_string(j);
+                        hashWord += to_string(j+'a');
+//                        hashWord += string(1,j+'a');
+                    }
+                }
+            }
+//            cout<<hashWord<<endl;
+            if (!myMap.count(hashWord)){
+                vector<string> vecSpace;
+                myMap[hashWord] = vecSpace;
+            }
+            myMap[hashWord].push_back(word);
+            }
+        for(auto vec : myMap){
+            res.push_back(vec.second);
+        }
+        return  res;
+
+        }
+```
+
+
+
+#### [128. 最长连续序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-consecutive-sequence/)
+
+
+
+#### [LeetCode 141. 环形链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/linked-list-cycle/)
+
+#### [LeetCode 146. LRU 缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)
+
+#### [LeetCode 560. 和为K的子数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/subarray-sum-equals-k/)
 
 ### **二叉树**
 
-[LeetCode 94. 二叉树的中序遍历](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+#### [LeetCode 94. 二叉树的中序遍历](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
-[101. 对称二叉树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/symmetric-tree/)
+#### [101. 对称二叉树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/symmetric-tree/)
 
-[102. 二叉树的层序遍历](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+#### [102. 二叉树的层序遍历](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
-[LeetCode 104. 二叉树的最大深度](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+#### [LeetCode 104. 二叉树的最大深度](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
-[LeetCode 105. 从前序与中序遍历序列构造二叉树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+#### [LeetCode 105. 从前序与中序遍历序列构造二叉树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 
-[LeetCode 114. 二叉树展开为链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
+#### [LeetCode 114. 二叉树展开为链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
 
-[LeetCode 543. 二叉树的直径](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/diameter-of-binary-tree/)
+#### [LeetCode 543. 二叉树的直径](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/diameter-of-binary-tree/)
 
 ### **二叉搜索树**
 
-[LeetCode 96. 不同的二叉搜索树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/unique-binary-search-trees/)
+#### [LeetCode 96. 不同的二叉搜索树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/unique-binary-search-trees/)
 
-[LeetCode 98. 验证二叉搜索树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/validate-binary-search-tree/)
+#### [LeetCode 98. 验证二叉搜索树](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/validate-binary-search-tree/)
 
 # **算法**
 
