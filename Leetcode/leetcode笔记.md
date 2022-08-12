@@ -1,6 +1,8 @@
-# 进度记录
+# 进度记录及计划
 
 https://leetcode.cn/u/mihtop-alemin/
+
+等刷了一定量的题后，需要回头看看做过的题。
 
 ## 2022.06.01
 
@@ -13,6 +15,12 @@ https://leetcode.cn/u/mihtop-alemin/
 上个月做oppo项目没有时间看，暑假再抓紧时间刷一刷
 
 ![image-20220710182554041](leetcode笔记.assets/image-20220710182554041.png)
+
+## 2022.08.11
+
+sikai一袋米
+
+![image-20220811120138113](leetcode笔记.assets/image-20220811120138113.png)
 
 
 
@@ -1631,7 +1639,7 @@ public:
 
 
 
-## 哈希表、二叉树
+## 哈希表、set、二叉树
 
 ### **哈希表**
 
@@ -1743,6 +1751,107 @@ public:
 
 
 #### [128. 最长连续序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-consecutive-sequence/)
+
+```
+给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
+
+请你设计并实现时间复杂度为 O(n) 的算法解决此问题。
+
+输入：nums = [100,4,200,1,3,2]
+输出：4
+解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+
+输入：nums = [0,3,7,2,5,8,4,6,0,1]
+输出：9
+
+```
+
+map学习：
+
+- 如果去一个不存在的映射值会自动生成一个为0的映射
+
+set学习
+
+- unordered_set是一种**关联容器**，set和map内部实现是基于RB-Tree，是有序的，unordered_set和unordered_map是**基于hashtable**。是无序的。
+- set查找元素是常数阶的
+
+复杂度 O（n），遍历两三次  ---->hashset 常数级复杂度，若先排序，然后记录最大连续次数。 但是排序算法复杂度都大于O（n）
+
+HashSet法：使用一个集合HashSet存入所有的数字，然后遍历数组中的每个数字，如果其在集合中存在，那么将其移除，然后分别用两个变量pre和next算出其前一个数跟后一个数，然后在集合中循环查找，如果pre在集合中，那么将pre移除集合，然后pre再自减1，直至pre不在集合之中，对next采用同样的方法，那么next-pre-1就是当前数字的最长连续序列，更新res即可。移除数字是为了避免大量的重复计算。
+
+HashMap法：用哈希表存储每个端点值对应连续区间的长度。若数已在哈希表中：跳过不做处理；若是新数加入：取出其左右相邻数已有的连续区间长度 left 和 right，计算当前数的区间长度为：`cur_length = left + right + 1`，根据 cur_length 更新最大长度 max_length 的值，更新区间两端点的长度值
+
+HashSet法代码实现
+
+```c++
+//leetcode submit region begin(Prohibit modification and deletion)
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        /**
+        	执行耗时:96 ms,击败了79.94% 的C++用户
+			内存消耗:44.5 MB,击败了81.27% 的C++用户
+        */
+        unordered_set<int > mySet(nums.begin(),nums.end());//set，集合。在此题中重复的数字可以不管。
+        int numsLen = nums.size();
+        int res = 0;
+        for (int value :nums) {
+            if (!mySet.count(value)){//没找见，则在之前已经被计数过。
+                continue;
+            }
+            int onceLen = 1;
+            int pre = value-1;
+            int next = value+1;
+            mySet.erase(value);
+            while (mySet.count(pre)){
+                onceLen++;
+                mySet.erase(pre);
+                pre--;
+            }
+            while (mySet.count(next)){
+                onceLen++;
+                mySet.erase(next);
+                next++;
+            }
+
+            res = max(res,onceLen);
+
+        }
+
+        return  res;
+    }
+};
+```
+
+HashMap法代码实现：
+
+```c++
+    int longestConsecutive(vector<int>& nums) {
+        /**
+			执行耗时:108 ms,击败了61.65% 的C++用户
+			内存消耗:48.5 MB,击败了68.70% 的C++用户
+        */
+        unordered_map<int,int> myMap;
+        int numsLen = nums.size();
+        int res = 0;
+        for (int value:nums) {
+            if (myMap.count(value)){
+                continue;
+            }
+            int left = 0;
+            int right = 0;
+            int onceLen = 0;
+            left = myMap.count(value-1)? myMap[value-1]:0;
+            right = myMap.count(value+1)? myMap[value+1]:0;
+            onceLen = right+left+1;
+            myMap[value]=onceLen;
+            myMap[value-left]=onceLen;//关键步骤，更新左右。
+            myMap[value+right]=onceLen;
+            res= max(res,onceLen);
+        }
+        return  res;
+    }
+```
 
 
 
