@@ -1979,7 +1979,177 @@ lRUCache.get(4);    // 返回 4
 
 思考
 
+- get O(1) ：用map，需要一个双向链表用来LRU
+
+- put O（1）：get用map，put往map里加，且需要一个双向链表用来LRU
+
+总结
+
+- 双向链表进行断开，连接时断开一般需要两个操作（形象化为两条线切断），链接一般需要四个操作（四条线重连）
+- 同一个文件中声明类/结构体是可以的
+- 很多实现上的细节
+
+```c++
+struct douList{
+    int value;
+    int key;
+    douList * pre;
+    douList * next;
+
+    douList(){}
+    douList(int key,int value){
+        this->key=key;
+        this->value=value;
+
+    }
+};
+class LRUCache {
+    /**
+    		执行耗时:392 ms,击败了47.47% 的C++用户
+			内存消耗:161.3 MB,击败了27.51% 的C++用户
+    */
+public:
+    int capacity;
+    int size;
+
+//    map<int, int> myMap;//直接存储值，则在get时找到对应的listNode复杂度为O n
+    map<int, douList *> myMap;//直接存储值，则在get时找到对应的listNode复杂度为O n
+    douList * first;
+    douList * last;
+
+    LRUCache(){}
+
+    LRUCache(int capacity) {
+        this->size=0;
+        this->capacity=capacity;
+        this->last=new douList(-1,-1);
+        this->first=new douList(-1,-1);
+        last->pre=first;
+        last->next=NULL;
+        first->pre=NULL;
+        first->next=last;
+    }
+    
+    int get(int key) {
+//        cout<<"get"<<endl;
+        if (myMap.count(key)){
+            douList * getNode = myMap[key];// 不用fing函数是因为myMap.find 返回的是迭代器
+            //断开
+            getNode->pre->next=getNode->next;
+            getNode->next->pre=getNode->pre;
+            //接在最后
+            last->pre->next=getNode;
+            getNode->pre=last->pre;
+            getNode->next=last;
+            last->pre=getNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<" first next "<<first->next->key<<endl;
+            return getNode->value;
+        }
+//        cout<<"last pre "<<last->pre->key<<endl;
+//        cout<<" first next "<<first->next->key<<endl;
+        return -1;
+    }
+    
+    void put(int key, int value) {
+//        cout<<"put"<<endl;
+        if(myMap.count(key)){
+            douList * changeNode = myMap[key];
+            //断开
+            changeNode->value=value;
+            changeNode->pre->next=changeNode->next;
+            changeNode->next->pre=changeNode->pre;
+            //接在最后
+            last->pre->next=changeNode;
+            changeNode->pre=last->pre;
+            changeNode->next=last;
+            last->pre=changeNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<"putcount first next "<<first->next->key<<endl;
+        }else{
+            douList * newNode = new douList(key,value);
+            myMap[key]=newNode;
+            this->size++;
+
+            if (this->size > this->capacity){
+                myMap.erase(first->next->key);
+//                cout<<"delete key "<<first->next->key<<endl;
+                first->next=first->next->next;
+                first->next->pre=first;
+                this->size--;
+            }
+
+            last->pre->next=newNode;
+            newNode->next=last;
+            newNode->pre=last->pre;
+            last->pre=newNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<"put new, first next "<<first->next->key<<endl;
+        }
+//        cout<<"size is "<<this->size<<endl;
+    }
+};
+```
+
+关于链表 first->next->next= fourth 操作的说明：
+
+- ​    链表first->next->next= fourth; 进行这样赋值时，修改的是值。只不过这个值是一个指针值
+
+- ​    此处修改并没有影响到third，仅仅是second 中的next 变量修改了。
+
+- ​    程序在分析first->next->next 时首先得到变量first->next，再根据first->next类类型进一步得到first->next的类内部变量next
+
+- ​    first->next->next 不完全等于 third，两者只是值相等，但是地址不同
+
+测试代码如下：
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+struct douList {
+    int value;
+    douList* pre;
+    douList* next;
+
+    douList() {}
+    douList(int value) {
+        this->value = value;
+    }
+};
+
+int main() {
+
+    douList* first = new douList(0);
+    douList* sec = new douList(1);
+    douList* third = new douList(2);
+    douList* fourth = new douList(3);
+    first->next = sec;
+    sec->next = third;
+
+    cout << third << endl;
+    cout << first->next->next << endl;
+    cout << & third << endl;
+    cout << & (first->next->next) << endl;
+    cout << fourth << endl;
+    cout << "---------------------------" << endl;
+    first->next->next= fourth;
+    cout << third << endl;
+    cout << first->next->next << endl;
+    cout << fourth << endl;
+}
+```
+
+运行结果如下，可以看到third和first->next->next值相同，但是地址不一样。将first->next->next修改后，third不受影响。也就是说，链表里连接的是类内部的成员变量，与外部用于传入的sec，third没有关系。链表的连接，是类内部成员的连接。
+
+![image-20220815171707969](leetcode笔记.assets/image-20220815171707969.png)
+
+
+
 #### [LeetCode 560. 和为K的子数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/subarray-sum-equals-k/)
+
+
 
 ### **二叉树**
 

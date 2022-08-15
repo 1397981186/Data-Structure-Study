@@ -53,18 +53,26 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 struct douList{
     int value;
+    int key;
     douList * pre;
     douList * next;
 
     douList(){}
-    douList(int value){
+    douList(int key,int value){
+        this->key=key;
         this->value=value;
+
     }
 };
 class LRUCache {
+    /**
+    		执行耗时:392 ms,击败了47.47% 的C++用户
+			内存消耗:161.3 MB,击败了27.51% 的C++用户
+    */
 public:
     int capacity;
     int size;
+
 //    map<int, int> myMap;//直接存储值，则在get时找到对应的listNode复杂度为O n
     map<int, douList *> myMap;//直接存储值，则在get时找到对应的listNode复杂度为O n
     douList * first;
@@ -75,8 +83,8 @@ public:
     LRUCache(int capacity) {
         this->size=0;
         this->capacity=capacity;
-        this->last=new douList(-1);
-        this->first=new douList(-1);
+        this->last=new douList(-1,-1);
+        this->first=new douList(-1,-1);
         last->pre=first;
         last->next=NULL;
         first->pre=NULL;
@@ -84,35 +92,62 @@ public:
     }
     
     int get(int key) {
+//        cout<<"get"<<endl;
         if (myMap.count(key)){
-            douList * getNode = myMap[key];// myMap.find 返回的时迭代器
+            douList * getNode = myMap[key];// 不用fing函数是因为myMap.find 返回的是迭代器
+            //断开
             getNode->pre->next=getNode->next;
             getNode->next->pre=getNode->pre;
+            //接在最后
             last->pre->next=getNode;
             getNode->pre=last->pre;
             getNode->next=last;
+            last->pre=getNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<" first next "<<first->next->key<<endl;
             return getNode->value;
         }
-
+//        cout<<"last pre "<<last->pre->key<<endl;
+//        cout<<" first next "<<first->next->key<<endl;
         return -1;
     }
     
     void put(int key, int value) {
-        douList * newNode = new douList(value);
-        myMap[key]=newNode;
-        this->size++;
+//        cout<<"put"<<endl;
+        if(myMap.count(key)){
+            douList * changeNode = myMap[key];
+            //断开
+            changeNode->value=value;
+            changeNode->pre->next=changeNode->next;
+            changeNode->next->pre=changeNode->pre;
+            //接在最后
+            last->pre->next=changeNode;
+            changeNode->pre=last->pre;
+            changeNode->next=last;
+            last->pre=changeNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<"putcount first next "<<first->next->key<<endl;
+        }else{
+            douList * newNode = new douList(key,value);
+            myMap[key]=newNode;
+            this->size++;
 
-        if (this->size > this->capacity){
-            myMap.erase(key);
-            first->next=first->next->next;
-            first->next->pre=first;
-            this->size--;
+            if (this->size > this->capacity){
+                myMap.erase(first->next->key);
+//                cout<<"delete key "<<first->next->key<<endl;
+                first->next=first->next->next;
+                first->next->pre=first;
+                this->size--;
+            }
+
+            last->pre->next=newNode;
+            newNode->next=last;
+            newNode->pre=last->pre;
+            last->pre=newNode;
+//            cout<<"last pre "<<last->pre->key<<endl;
+//            cout<<"put new, first next "<<first->next->key<<endl;
         }
-
-        last->pre->next=newNode;
-        newNode->next=last;
-        newNode->pre=last->pre;
-        last->pre=newNode;
+//        cout<<"size is "<<this->size<<endl;
     }
 };
 
