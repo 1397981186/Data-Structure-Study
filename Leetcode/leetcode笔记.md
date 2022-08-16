@@ -1671,7 +1671,7 @@ public:
 
 
 
-## 哈希表、set、二叉树
+## 哈希表map、set、二叉树
 
 ### **哈希表**
 
@@ -2148,6 +2148,84 @@ int main() {
 
 
 #### [LeetCode 560. 和为K的子数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/subarray-sum-equals-k/)
+
+```
+给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的连续子数组的个数 。
+
+示例 1：
+输入：nums = [1,1,1], k = 2
+输出：2
+
+示例 2：
+输入：nums = [1,2,3], k = 3
+输出：2
+ 
+提示：
+1 <= nums.length <= 2 * 104
+-1000 <= nums[i] <= 1000
+-107 <= k <= 107
+```
+
+暴力法，一个一个，两个两个，三个三个看，使用动态规划，每次累计，复杂度n方  --->Time Limit Exceeded
+
+```c++
+    int subarraySum1(vector<int>& nums, int k) {
+        /**
+            Time Limit Exceeded
+        */
+        int numsSize = nums.size();
+        vector<int> myVec(nums.begin(), nums.end());
+        int res = 0;
+        for (int i = 0; i <= numsSize-1; i++) {//以每一个vector中的数字为开始
+            if (myVec[i]==k){res++;}
+            for (int j = i+1; j <= numsSize -1; j++) {//每一个可以的累加
+                myVec[i]+=nums[j];
+                if (myVec[i]==k){res++;}
+            }
+        }
+        return res;
+    }
+```
+
+利用哈希表进行前缀法，重复利用了每一次的前缀，复杂度O（n）
+
+力扣官方题解：https://leetcode.cn/problems/subarray-sum-equals-k/solution/he-wei-kde-zi-shu-zu-by-leetcode-solution/
+
+从左到右遍历，如图到1时，先得到pre为14，看看前面有没有14-7 = 7 的前缀数组。（前缀：从1往右的子数组，如【2，-3】 【4，7，2，-3】）有的话就增加res（把那个7的前缀数组去掉，得到所要的数组，此处去掉【3，4】剩下【7，2，-3，1】构成和为7的数组）
+
+![img](leetcode笔记.assets/7.png)
+
+- pre[i ] = nums[0]+nums[1]+...+nums[i-1]+nums[i]
+- 维护一个 hashmap，hashmap 的 key 为累加值 acc，value 为累加值 acc 出现的次数。
+- 迭代数组，然后不断更新 acc 和 hashmap，如果 acc 等于 k，那么很明显应该+1. 如果 hashmap[acc - k] 存在，我们就把它加到结果中去即可。
+
+```c++
+    int subarraySum(vector<int>& nums, int k) {
+        //前缀和法，详细见笔记
+        /**
+        	执行耗时:100 ms,击败了15.32% 的C++用户
+			内存消耗:42.7 MB,击败了29.37% 的C++用户
+        */
+        int numsSize = nums.size();
+        map<int,int> myMap;
+        myMap[0]=1;
+        int res = 0;
+        int pre = 0;
+        for (int i = 0; i <= numsSize - 1; i++) {
+            pre+=nums[i];
+            if (myMap.count(pre-k)){
+                res += myMap[pre-k];
+            }
+//            if (myMap.count(pre)){
+//                myMap[pre]++;
+//            } else{
+//                myMap[pre]=1;
+//            }
+            myMap[pre]++;
+        }
+        return res;
+    }
+```
 
 
 
