@@ -27,3 +27,4 @@ add_executable(128_LongestConsecutiveSequence ./editor/cn/128_LongestConsecutive
 add_executable(141_LinkedListCycle ./editor/cn/141_LinkedListCycle.cpp)
 add_executable(146_LruCache ./editor/cn/146_LruCache.cpp)
 add_executable(560_SubarraySumEqualsK ./editor/cn/560_SubarraySumEqualsK.cpp)
+add_executable(94_BinaryTreeInorderTraversal ./editor/cn/94_BinaryTreeInorderTraversal.cpp)
