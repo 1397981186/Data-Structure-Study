@@ -3,6 +3,28 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/101_SymmetricTree.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/101_SymmetricTree.md" />
+              <option name="frontendQuestionId" value="leetcode.cn101" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/101_SymmetricTree.cpp" />
+              <option name="titleSlug" value="symmetric-tree" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/102_BinaryTreeLevelOrderTraversal.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/102_BinaryTreeLevelOrderTraversal.md" />
+              <option name="frontendQuestionId" value="leetcode.cn102" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/102_BinaryTreeLevelOrderTraversal.cpp" />
+              <option name="titleSlug" value="binary-tree-level-order-traversal" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/128_LongestConsecutiveSequence.cpp">
           <value>
             <LeetcodeEditor>
