@@ -25,6 +25,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/104_MaximumDepthOfBinaryTree.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/104_MaximumDepthOfBinaryTree.md" />
+              <option name="frontendQuestionId" value="leetcode.cn104" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/104_MaximumDepthOfBinaryTree.cpp" />
+              <option name="titleSlug" value="maximum-depth-of-binary-tree" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/128_LongestConsecutiveSequence.cpp">
           <value>
             <LeetcodeEditor>
