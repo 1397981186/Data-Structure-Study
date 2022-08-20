@@ -31,3 +31,4 @@ add_executable(94_BinaryTreeInorderTraversal ./editor/cn/94_BinaryTreeInorderTra
 add_executable(101_SymmetricTree ./editor/cn/101_SymmetricTree.cpp)
 add_executable(102_BinaryTreeLevelOrderTraversal ./editor/cn/102_BinaryTreeLevelOrderTraversal.cpp)
 add_executable(104_MaximumDepthOfBinaryTree ./editor/cn/104_MaximumDepthOfBinaryTree.cpp)
+add_executable(105_ConstructBinaryTreeFromPreorderAndInorderTraversal ./editor/cn/105_ConstructBinaryTreeFromPreorderAndInorderTraversal.cpp)
