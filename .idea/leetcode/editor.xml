@@ -47,6 +47,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/114_FlattenBinaryTreeToLinkedList.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/114_FlattenBinaryTreeToLinkedList.md" />
+              <option name="frontendQuestionId" value="leetcode.cn114" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/114_FlattenBinaryTreeToLinkedList.cpp" />
+              <option name="titleSlug" value="flatten-binary-tree-to-linked-list" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/128_LongestConsecutiveSequence.cpp">
           <value>
             <LeetcodeEditor>

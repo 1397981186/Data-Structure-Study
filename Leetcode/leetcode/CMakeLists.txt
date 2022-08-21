@@ -1,6 +1,4 @@
 project(Data-Structure-Study)
-
-
 add_executable(4_MedianOfTwoSortedArrays ./editor/cn/4_MedianOfTwoSortedArrays.cpp)
 add_executable(15_ThreeSum ./editor/cn/15_ThreeSum.cpp)
 add_executable(75_SortColors ./editor/cn/75_SortColors.cpp)
@@ -32,3 +30,4 @@ add_executable(101_SymmetricTree ./editor/cn/101_SymmetricTree.cpp)
 add_executable(102_BinaryTreeLevelOrderTraversal ./editor/cn/102_BinaryTreeLevelOrderTraversal.cpp)
 add_executable(104_MaximumDepthOfBinaryTree ./editor/cn/104_MaximumDepthOfBinaryTree.cpp)
 add_executable(105_ConstructBinaryTreeFromPreorderAndInorderTraversal ./editor/cn/105_ConstructBinaryTreeFromPreorderAndInorderTraversal.cpp)
+add_executable(114_FlattenBinaryTreeToLinkedList ./editor/cn/114_FlattenBinaryTreeToLinkedList.cpp)
