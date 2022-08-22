@@ -32,3 +32,4 @@ add_executable(104_MaximumDepthOfBinaryTree ./editor/cn/104_MaximumDepthOfBinary
 add_executable(105_ConstructBinaryTreeFromPreorderAndInorderTraversal ./editor/cn/105_ConstructBinaryTreeFromPreorderAndInorderTraversal.cpp)
 add_executable(114_FlattenBinaryTreeToLinkedList ./editor/cn/114_FlattenBinaryTreeToLinkedList.cpp)
 add_executable(543_DiameterOfBinaryTree ./editor/cn/543_DiameterOfBinaryTree.cpp)
+add_executable(96_UniqueBinarySearchTrees ./editor/cn/96_UniqueBinarySearchTrees.cpp)

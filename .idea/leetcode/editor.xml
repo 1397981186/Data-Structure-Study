@@ -388,6 +388,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/96_UniqueBinarySearchTrees.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/96_UniqueBinarySearchTrees.md" />
+              <option name="frontendQuestionId" value="leetcode.cn96" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/96_UniqueBinarySearchTrees.cpp" />
+              <option name="titleSlug" value="unique-binary-search-trees" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/MedianOfTwoSortedArrays.cpp">
           <value>
             <LeetcodeEditor>
