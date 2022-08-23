@@ -34,3 +34,4 @@ add_executable(114_FlattenBinaryTreeToLinkedList ./editor/cn/114_FlattenBinaryTr
 add_executable(543_DiameterOfBinaryTree ./editor/cn/543_DiameterOfBinaryTree.cpp)
 add_executable(96_UniqueBinarySearchTrees ./editor/cn/96_UniqueBinarySearchTrees.cpp)
 add_executable(98_ValidateBinarySearchTree ./editor/cn/98_ValidateBinarySearchTree.cpp)
+add_executable(48_RotateImage ./editor/cn/48_RotateImage.cpp)
