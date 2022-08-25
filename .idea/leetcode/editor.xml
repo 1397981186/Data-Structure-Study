@@ -58,6 +58,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/11_ContainerWithMostWater.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/11_ContainerWithMostWater.md" />
+              <option name="frontendQuestionId" value="leetcode.cn11" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/11_ContainerWithMostWater.cpp" />
+              <option name="titleSlug" value="container-with-most-water" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/128_LongestConsecutiveSequence.cpp">
           <value>
             <LeetcodeEditor>
@@ -330,6 +341,17 @@
               <option name="host" value="leetcode.cn" />
               <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/560_SubarraySumEqualsK.cpp" />
               <option name="titleSlug" value="subarray-sum-equals-k" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/714_BestTimeToBuyAndSellStockWithTransactionFee.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/714_BestTimeToBuyAndSellStockWithTransactionFee.md" />
+              <option name="frontendQuestionId" value="leetcode.cn714" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/714_BestTimeToBuyAndSellStockWithTransactionFee.cpp" />
+              <option name="titleSlug" value="best-time-to-buy-and-sell-stock-with-transaction-fee" />
             </LeetcodeEditor>
           </value>
         </entry>
