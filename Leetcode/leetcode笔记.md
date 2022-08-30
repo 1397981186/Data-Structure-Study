@@ -3552,7 +3552,7 @@ public:
 - 贪心：每次跳，都跳到能跳区间的最大的点上，以保证续航--》[4,2,0,0,1,1,4,4,4,0,4,0]过不了
 - 修改贪心策略：每次跳，都跳到 i+num[i]最远的点上，保证“延伸最长”
 
-<img src="leetcode笔记.assets/68747470733a2f2f696d672d626c6f672e6373646e696d672e636e2f32303230313132343135343735383232392e706e67.png" alt="55.跳跃游戏" style="zoom:50%;" />
+<img src="leetcode笔记.assets/跳跃游戏.png" alt="55.跳跃游戏" style="zoom:50%;" />
 
 自己代码如下：
 
@@ -3597,13 +3597,128 @@ public:
 };
 ```
 
+官方见解版代码如下
 
+注意
+
+- cover的更新与for循环的关系
+- 复杂度差不多，不知道为什么自己写的反而更省内存，怀玉i
+
+```c++
+    bool canJump(vector<int>& nums) {
+    /**
+    	执行耗时:56 ms,击败了40.43% 的C++用户
+	    内存消耗:47.1 MB,击败了84.38% 的C++用户
+    */
+        int cover = 0;
+        if (nums.size() == 1) return true; // 只有一个元素，就是能达到
+        for (int i = 0; i <= cover; i++) { // 注意这里是小于等于cover
+            cover = max(i + nums[i], cover);
+            if (cover >= nums.size() - 1) return true; // 说明可以覆盖到终点了
+        }
+        return false;
+    }
+```
 
 ### [LeetCode 309. 最佳买卖股票时机含冷冻期](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+```
+给定一个整数数组
+ prices，其中第 prices[i] 表示第 i 天的股票价格 。 
+
+ 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）: 
+
+ 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。 
+
+ 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 
+
+ 
+
+ 示例 1: 
+
+ 
+输入: prices = [1,2,3,0,2]
+输出: 3 
+解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出] 
+
+ 示例 2: 
+
+ 
+输入: prices = [1]
+输出: 0
+ 
+
+ 
+
+ 提示： 
+
+ 
+ 1 <= prices.length <= 5000 
+ 0 <= prices[i] <= 1000 
+ 
+
+ Related Topics 数组 动态规划 👍 1304 👎 0
+```
+
+在之前动态规划的基础上进行修改即可
+
+```c++
+class Solution {
+    //思考
+    //冷冻期：前一天卖掉股票会对今天的购买产生影响
+    //贪心：？？ 每次利润最大的同时还要妥协在最低点买？
+    //动态规划：三维，其中一维用于记录冻结期--》不可，迭代没有思路
+
+    //题解
+    //解决此题，需要用到状态机。股票题都有状态机思想
+    //分成3个状态，再沿用之前的方法就可求解。
+
+public:
+    int maxProfit(vector<int>& prices) {
+        
+        /**
+        	执行耗时:4 ms,击败了74.63% 的C++用户
+	        内存消耗:11.5 MB,击败了14.57% 的C++用户
+        */
+        int priSize = prices.size();
+        vector<vector<int>> myVec(priSize,vector<int>(3,0));
+        myVec[0][0]=-prices[0];//hold Shares
+        myVec[0][1]=0;//hold Money
+        myVec[0][2]=0;//rest
+
+        for (int i = 1; i <= priSize - 1; i++) {
+            myVec[i][0]= max(myVec[i-1][0],myVec[i-1][1]-prices[i]);
+            myVec[i][1]= max(myVec[i-1][1],myVec[i-1][2]);
+            myVec[i][2]= myVec[i-1][0]+prices[i];
+        }
+        return max(myVec[priSize-1][1],myVec[priSize-1][2]);
+    }
+};
+```
 
 ### [LeetCode 406. 根据身高重建队列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/queue-reconstruction-by-height/)
 
 ### 贪心算法总结
+
+#### 贪心的套路（什么时候用贪心）
+
+**说实话贪心算法并没有固定的套路**。
+
+所以唯一的难点就是如何通过局部最优，推出整体最优。
+
+那么如何能看出局部最优是否能推出整体最优呢？有没有什么固定策略或者套路呢？
+
+**不好意思，也没有！** 靠自己手动模拟，如果模拟可行，就可以试一试贪心策略，如果不可行，可能需要动态规划。
+
+**贪心有时候就是常识性的推导，所以会认为本应该就这么做！**
+
+需要自己多注意，多悟。
+
+#### 贪心一图流
+
+<img src="leetcode笔记.assets/贪心算法一图" alt="img" style="zoom:170%;" />
+
+
 
 ## **二分**
 
