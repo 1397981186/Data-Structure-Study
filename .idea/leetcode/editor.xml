@@ -289,6 +289,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/406_QueueReconstructionByHeight.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/doc/content/406_QueueReconstructionByHeight.md" />
+              <option name="frontendQuestionId" value="leetcode.cn406" />
+              <option name="host" value="leetcode.cn" />
+              <option name="path" value="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/406_QueueReconstructionByHeight.cpp" />
+              <option name="titleSlug" value="queue-reconstruction-by-height" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/Leetcode/leetcode/editor/cn/42_TrappingRainWater.cpp">
           <value>
             <LeetcodeEditor>

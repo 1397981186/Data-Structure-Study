@@ -3698,6 +3698,14 @@ public:
 
 ### [LeetCode 406. 根据身高重建队列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/queue-reconstruction-by-height/)
 
+总结
+
+- 此类两个维度的，首先要确定其中一个维度。
+
+
+
+
+
 ### 贪心算法总结
 
 #### 贪心的套路（什么时候用贪心）
@@ -3716,7 +3724,7 @@ public:
 
 #### 贪心一图流
 
-<img src="leetcode笔记.assets/贪心算法一图" alt="img" style="zoom:170%;" />
+![img](https://camo.githubusercontent.com/05db6c968007fdc42a085ca7397bc2f8dc6f1778871661c58ac535351607c507/68747470733a2f2f636f64652d7468696e6b696e672d313235333835353039332e66696c652e6d7971636c6f75642e636f6d2f706963732f25453825423425414125453525424625383325453625383025424225453725424225393377617465722e706e67)
 
 
 

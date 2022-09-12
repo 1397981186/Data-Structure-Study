@@ -38,4 +38,4 @@ add_executable(714_BestTimeToBuyAndSellStockWithTransactionFee ./editor/cn/714_B
 add_executable(122_BestTimeToBuyAndSellStockIi ./editor/cn/122_BestTimeToBuyAndSellStockIi.cpp)
 add_executable(55_JumpGame ./editor/cn/55_JumpGame.cpp)
 add_executable(309_BestTimeToBuyAndSellStockWithCooldown ./editor/cn/309_BestTimeToBuyAndSellStockWithCooldown.cpp)
-add_executable(309_BestTimeToBuyAndSellStockWithCooldown ./editor/cn/309_BestTimeToBuyAndSellStockWithCooldown.cpp)
+add_executable(406_QueueReconstructionByHeight ./editor/cn/406_QueueReconstructionByHeight.cpp)
